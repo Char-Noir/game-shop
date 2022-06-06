@@ -1,0 +1,103 @@
+﻿body {
+    background: white;
+    color: black;
+    margin: 0px;
+    padding: 0px;
+    font-family: "Montserrat", sans-serif;
+}
+$bc_header: #1D78DD;
+$c_header: white;
+$bc_sacsent: #FFD651;
+
+.container {
+    width: 100%;
+    padding: 0 3% 0 3%;
+}
+
+.header, .footer {
+    width: 100%;
+    background-color: $bc_header;
+    color: $c_header;
+}
+
+.header_inner, .footer_inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.Logo{
+    width: 164px;
+    height: 32px;
+}
+
+nav {
+    margin: 0;
+a {
+    color: $c_header;
+    margin: 0 30px;
+    text-decoration: none;
+}
+a:hover{
+    color: $bc_sacsent!important;
+}
+}
+
+.cart, .user{
+    fill: white;
+    margin: 0 20px;
+}
+
+.mb-3 {
+    width: 40vh;
+    margin-top: 1rem!important;
+}
+
+.footer{
+    margin-top: 140px;
+    padding: 80px 0px;
+}
+
+.cart:hover, .user:hover{
+    fill: $bc_sacsent;
+}
+
+.footer_inner_additional{
+    padding-top: 32px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.head_icons{
+    display: flex;
+}
+
+.avatars{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-size: contain;
+}
+
+.ava1{
+    background-image: url("../img/Anna.jpg");
+}
+.ava2{
+    background-image: url("../img/Danila.jpg");
+}
+.ava3{
+    background-image: url("../img/Sashka.jpg");
+}
+.ava4{
+    background-image: url("../img/Nastya.jpg");
+}
+.ava5{
+    background-image: url("../img/Nadya.jpg");
+}
+
+.flogo, .ficons{
+    width: 20%;
+}
