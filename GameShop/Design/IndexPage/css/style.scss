@@ -1,0 +1,255 @@
+// Основний код для всіх сторінок
+
+body {
+  background: white;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px!important;
+}
+
+$bc_header: #1D78DD;
+$c_header: white;
+$bc_acsent: #FF5F00;
+$bc_sacsent: #FFD651;
+$bc_card: #E9E6FE;
+
+a{
+  text-decoration: none!important;
+}
+
+.button{
+  display: inline-block;
+  padding: 15px 60px;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: $bc_acsent;
+  color: $c_header;
+  transition: .5s;
+  text-decoration: none;
+  text-align: center;
+  &:hover{
+    background-color: $bc_sacsent;
+    color: $bc_header;
+  }
+}
+
+.my_container {
+  width: 100%;
+  height: 100%;
+  padding: 0 6%;
+}
+
+.site_part{
+  width: 100%;
+  padding: 0 6%;
+}
+
+.header, .footer {
+  width: 100%;
+  background-color: $bc_header;
+  color: $c_header;
+}
+
+.header_inner, .footer_inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.Logo{
+  width: 164px;
+  height: 32px;
+}
+
+nav {
+  margin: 0;
+  a {
+    color: $c_header;
+    margin: 0 30px;
+    text-decoration: none;
+  }
+  a:hover{
+    color: $bc_sacsent!important;
+  }
+}
+
+.cart, .user{
+  fill: white;
+  margin-left: 20px;
+}
+
+.cart:hover, .user:hover{
+  fill: $bc_sacsent;
+}
+
+.mb-3 {
+  width: 40vh;
+  margin-top: 1rem!important;
+}
+
+.footer{
+  margin-top: 140px;
+  padding: 80px 0px;
+}
+
+.footer_inner_additional{
+  padding-top: 32px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.head_icons{
+  display: flex;
+}
+
+.ficons{
+  width: 240px;
+  justify-content: space-around;
+}
+
+.avatars{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: contain;
+}
+
+.flogo{
+  width: 20%;
+}
+
+
+
+// Код для карточок продуктів та каталогу
+
+.part_product{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pcard{
+  width: 240px;
+  height: 100%;
+  margin: 0 calc((100% - 960px)/8) 60px calc((100% - 960px)/8);
+}
+
+.pcard:hover{
+  transform: scale(1.02);
+}
+
+.pc_back, .cc_back{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $bc_card;
+  padding: 16px;
+  border-radius: 0 0 16px 16px;
+}
+
+.pc_img{
+  width: 240px;
+  height: 240px;
+  background-size: cover;
+}
+
+.pc_name{
+  font-weight: 500;
+  color: black;
+}
+
+.pc_cost{
+  margin: 0 0 0 auto;
+  color: black;
+}
+
+.cc_back{
+  justify-content: center;
+}
+
+
+
+// Код головної сторінки
+
+.first_screen{
+  height: 460px;
+  background-image: url(../img/static/first_screen/fs_bc.png);
+  background-size: cover;
+  color: $c_header;
+  width: 100%;
+}
+
+.fs_inner{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fs_align{
+  text-align: center;
+  .button{
+    margin-top: 30px;
+  }
+}
+
+.fs_title{
+  font-weight: bold;
+  font-size: 64px;
+}
+
+.part_inner{
+  padding-top: 80px;
+}
+
+.part_title{
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.part_benefits{
+  display: flex;
+  justify-content: center;
+}
+
+.first_benefit, .second_benefit{
+  display: flex;
+  align-items: center;
+  margin: 0 80px;
+}
+
+.star{
+  width: 52px;
+  height: 72px;
+}
+
+.van{
+  width: 72px;
+  height: 72px;
+}
+
+.benefit_text{
+  width: 240px;
+  margin-left: 30px;
+}
+
+.benefit_title{
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+
+
+// Код сторінки Каталог
+
+.catalog_button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
