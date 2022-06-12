@@ -9,6 +9,10 @@ namespace GameShop.Models.Utils
             var bytes = System.Text.Encoding.GetEncoding("Cyrillic").GetBytes(txt);
             return System.Text.Encoding.ASCII.GetString(bytes);
         }
+        public static string Cut(this string txt,int end)
+        {
+            return txt.Substring(0,end);
+        }
         public static string GenerateSlug(this string phrase)
         {
             var str = phrase.RemoveAccent().ToLower();
