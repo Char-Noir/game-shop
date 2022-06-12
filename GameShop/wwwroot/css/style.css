@@ -154,7 +154,8 @@ nav a:hover {
 }
 
 .pcard_inner{
-
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+    border-radius: 0 0 16px 16px;
 }
 
 .pcard_inner:hover {
@@ -175,8 +176,6 @@ nav a:hover {
     width: 240px;
     height: 240px;
     background-size: cover;
-    padding: 5px 5px 0 5px;
-    background-color   :#faf9ff;
 }
 
 .pc_name {
