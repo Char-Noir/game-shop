@@ -19,16 +19,16 @@
     <div class="header">
         <div class="my_container">
             <div class="header_inner">
-                <img src="img\static\Logo.png" class="Logo" alt="Logo">
+                <img src="~/images/static/Logo.png" class="Logo" alt="Logo">
                 <nav class="nav">
-                    <a class="nav_link" href="index">Головна</a>
-                    <a class="nav_link" href="catalog">Каталог</a>
-                    <a class="nav_link" href="#">Про нас</a>
+                    <a class="nav_link" asp-page="/Index">Головна</a>
+                    <a class="nav_link" asp-page="/Catalog">Каталог</a>
+                    <a class="nav_link" asp-page="/Products/Index">Про нас</a>
                 </nav>
-                <form>
-                    <div class="mb-3">
+                <form id="searchNavBar"  action="Products/Index" method="get">
+                    <div class="mb-3" >
                         <button type="submit"><img src="img/static/search.svg" alt=""></button>
-                        <input type="search" class="form-control" id="inputsearch" aria-describedby="search" placeholder="Пошук">
+                        <input type="search" class="form-control" id="search" aria-describedby="search" placeholder="Пошук" name="FilterEntity.SearchString">
                     </div>
                 </form>
                 <div class="head_icons">
@@ -295,18 +295,18 @@
     <div class="footer">
         <div class="my_container">
             <div class="footer_inner">
-                <div class="logo_inner flogo"><img src="img\static\Logo.png" class="Logo" alt="Logo"></div>
+                <div class="logo_inner flogo"><img src="~/images/static/Logo.png" class="Logo" alt="Logo"></div>
                 <nav class="nav fnav">
                     <a class="nav_link" href="#">Блог</a>
                     <a class="nav_link" href="#">Компанія</a>
                     <a class="nav_link" href="#">Допомога</a>
                 </nav>
                 <div class="head_icons ficons">
-                    <a class="nav_link" href="#"><img src="img\static\Anna.jpg" class="avatars"></a>
-                    <a class="nav_link" href="#"><img src="img\static\Danila.jpg" class="avatars"></a>
-                    <a class="nav_link" href="#"><img src="img\static\Sashka.jpg" class="avatars"></a>
-                    <a class="nav_link" href="#"><img src="img\static\Nastya.jpg" class="avatars"></a>
-                    <a class="nav_link" href="#"><img src="img\static\Nadya.jpg" class="avatars"></a>
+                    <a class="nav_link" href="#"><img src="~/images/static/Anna.jpg" class="avatars"></a>
+                    <a class="nav_link" href="#"><img src="~/images/static/Danila.jpg" class="avatars"></a>
+                    <a class="nav_link" href="#"><img src="~/images/static/Sashka.jpg" class="avatars"></a>
+                    <a class="nav_link" href="#"><img src="~/images/static/Nastya.jpg" class="avatars"></a>
+                    <a class="nav_link" href="#"><img src="~/images/static/Nadya.jpg" class="avatars"></a>
                 </div>
             </div>
             <div class="footer_inner_additional">
