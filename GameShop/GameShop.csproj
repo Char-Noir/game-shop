@@ -52,4 +52,34 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\images\static\Anna.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\static\Danila.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\static\Logo.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\static\Nadya.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\static\Nastya.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\static\Sashka.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\catalog\brain.png" />
+    <None Include="wwwroot\images\catalog\child.png" />
+    <None Include="wwwroot\images\catalog\company.png" />
+    <None Include="wwwroot\images\catalog\family.png" />
+    <None Include="wwwroot\images\catalog\kartkovi.png" />
+    <None Include="wwwroot\images\catalog\kubiki.png" />
+    <None Include="wwwroot\images\catalog\table.png" />
+    <None Include="wwwroot\images\catalog\two.png" />
+    <None Include="wwwroot\images\static\Anna.jpg" />
+    <None Include="wwwroot\images\static\Danila.jpg" />
+    <None Include="wwwroot\images\static\index\fs_bc.png" />
+    <None Include="wwwroot\images\static\index\star.svg" />
+    <None Include="wwwroot\images\static\index\van.svg" />
+    <None Include="wwwroot\images\static\Logo.png" />
+    <None Include="wwwroot\images\static\Nadya.jpg" />
+    <None Include="wwwroot\images\static\Nastya.jpg" />
+    <None Include="wwwroot\images\static\Sashka.jpg" />
+    <None Include="wwwroot\images\static\search.svg" />
+  </ItemGroup>
+
 </Project>
