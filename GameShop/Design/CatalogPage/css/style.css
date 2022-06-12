@@ -30,7 +30,7 @@ a {
 .my_container {
   width: 100%;
   height: 100%;
-  padding: 0 6%;
+  padding: 0 8%;
 }
 
 .site_part {
@@ -78,13 +78,36 @@ nav a:hover {
 }
 
 .mb-3 {
-  width: 40vh;
   margin-top: 1rem !important;
+  display: flex;
+  width: 20vw;
+  height: 36px;
+  border-radius: 5px;
+}
+.mb-3 .form-control {
+  width: calc(20vw - 40px);
+  border-radius: 0 5px 5px 0;
+  border: none;
+}
+.mb-3 .form-control:active, .mb-3 .form-control:hover, .mb-3 .form-control:focus {
+  box-shadow: 3px 5px #FFD651;
+}
+.mb-3 button {
+  width: 60px;
+  border: none;
+  background-color: white;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mb-3 button:hover {
+  background-color: #E9E6FE;
 }
 
 .footer {
   margin-top: 140px;
-  padding: 80px 0px;
+  padding: 80px 0;
 }
 
 .footer_inner_additional {
@@ -121,20 +144,26 @@ nav a:hover {
 }
 
 .pcard {
-  width: 240px;
+  width: calc(25% - 32px);
+  min-width: 240px;
+  max-height: 300px;
+  margin: 0 16px 40px 16px;
   height: 100%;
-  margin: 0 calc((100% - 960px) / 8) 60px calc((100% - 960px) / 8);
+  display: flex;
+  justify-content: center;
 }
 
-.pcard:hover {
+.pcard_inner:hover {
   transform: scale(1.02);
 }
 
 .pc_back, .cc_back {
+  width: 240px;
+  height: 60px;
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   background-color: #E9E6FE;
-  padding: 16px;
+  padding: 0 16px;
   border-radius: 0 0 16px 16px;
 }
 
@@ -160,7 +189,7 @@ nav a:hover {
 
 .first_screen {
   height: 460px;
-  background-image: url(../img/static/first_screen/fs_bc.png);
+  background-image: url(../img/static/index/fs_bc.png);
   background-size: cover;
   color: white;
   width: 100%;
@@ -186,14 +215,14 @@ nav a:hover {
 }
 
 .part_inner {
-  padding-top: 80px;
+  padding-top: 50px;
 }
 
 .part_title {
   font-weight: bold;
   font-size: 48px;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .part_benefits {
@@ -232,4 +261,155 @@ nav a:hover {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.part_filtr_html {
+  display: flex;
+  justify-content: space-between;
+}
+
+.part_filtr {
+  width: 25%;
+  margin-top: 1rem !important;
+}
+
+.filtr_part {
+  margin-bottom: 32px;
+}
+
+.filtr_title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 11px;
+}
+
+.chrange {
+  width: 86% !important;
+  margin-left: 10px;
+}
+
+.ui-widget-header {
+  background: #FF5F00 !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+  background: black !important;
+}
+
+.chamount {
+  width: 86%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.chamount input {
+  text-align: center !important;
+}
+
+.amount1, .amount2 {
+  margin: 0 auto;
+  width: 36% !important;
+  padding: 5px 10px;
+  border: 2px solid #FFD651 !important;
+  border-radius: 10px;
+  font-weight: 500 !important;
+}
+
+.ui-slider .ui-slider-handle {
+  width: 10px !important;
+  border: none !important;
+}
+
+.custom_checkbox {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  filter: none;
+}
+.custom_checkbox:checked {
+  filter: invert(100%) hue-rotate(16deg) brightness(1.2);
+}
+
+.two_columns {
+  display: flex;
+}
+
+.column {
+  width: 50%;
+}
+
+.one_checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.part_filtr_product {
+  max-width: 70%;
+  margin-left: 5%;
+}
+
+.part_form {
+  display: flex;
+  margin-left: 28px;
+  margin-bottom: 36px;
+}
+
+select {
+  padding: 0 18px;
+}
+
+.filtr_form {
+  width: 20vw;
+  margin-right: 20px;
+}
+
+.in_filtr {
+  border: 2px solid #FFD651;
+  height: 54px;
+}
+
+.fpcard {
+  width: calc(33.3333333333% - 32px);
+  min-width: 240px;
+  max-height: 300px;
+  margin: 0 16px 40px 16px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.i_justify {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.fbutton {
+  margin-top: 36px;
+}
+
+ul {
+  margin: 24px 0 0 0 !important;
+  padding: 0 !important;
+  display: flex;
+}
+ul li {
+  list-style: none;
+}
+ul li a {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 40px;
+  color: black;
+  margin: 5px;
+  border-radius: 4px;
+  border: 2px solid #FFD651;
+}
+ul li a:hover {
+  background: #FF5F00;
+  color: white;
+  border: none;
 }
