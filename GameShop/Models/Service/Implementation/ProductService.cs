@@ -6,6 +6,7 @@ using GameShop.Models.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using GameShop.Models.Utils.Pagination;
 using GameShop.Models.Entity.RequestEntity;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace GameShop.Models.Service.Implementation
 {
@@ -79,10 +80,16 @@ namespace GameShop.Models.Service.Implementation
             return product;
         }
 
-        public async Task<IList<Product>> GetPaginatedResult(PaginationDataTable pagination, ProductsFilterEntity filterEntity)
+        private IQueryable<Product> SimpleFilter(IIncludableQueryable<Product, Product_Type?> query, ProductsFilterEntity filterEntity)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public async Task<PaginationResponse<Product>> GetPaginatedResult(PaginationDataTable pagination, ProductsFilterEntity filterEntity)
         {
             //Including
             var includes =  _context.Product.Include(p => p.WarhouseItem).Include(p=>p.ProductTypes).ThenInclude(m=>m.Product_Type);
+            
             filterEntity.Initialize();
             //Simple filtering
             //By price
@@ -156,6 +163,9 @@ namespace GameShop.Models.Service.Implementation
                     filters = filters.Where(p => p.Age > max || p.Age <= min);
                 }
             }
+
+            
+           
             //Complex filtering
             //TODO:Do it simple
             var promRes = await filters.ToListAsync();
@@ -167,16 +177,22 @@ namespace GameShop.Models.Service.Implementation
                 sorted = new List<Product>();
                 sorted = (from item in filterEntity.Categories where item.IsChecked select promRes.Where(p => p._productTypes.Any(m => m != null && m.Id == item.Id)).ToList()).Aggregate(sorted, (current, newL) => current.Union(newL).ToList());
             }
+            var count = sorted.Count; 
             var totalPages = Util.CeilToOne(decimal.Divide(sorted.Count, pagination.PageSize));//if no items in pagination data we still can access to first page
             
             if (pagination.CurrentPage > totalPages)
             {
+                
                 throw new NotFoundException("There are no such page");
             }
 
             if (pagination.OrderBy == string.Empty)
-                return sorted.Skip((pagination.CurrentPage - 1) * pagination.PageSize).Take(pagination.PageSize)
-                    .ToList();
+                return new PaginationResponse<Product>
+                {
+                    Result = sorted.Skip((pagination.CurrentPage - 1) * pagination.PageSize).Take(pagination.PageSize)
+                        .ToList(),
+                    Count = count
+                };
             
             if (pagination.Order == Order.ASC)
             {
@@ -200,7 +216,12 @@ namespace GameShop.Models.Service.Implementation
             }
             
             //Pagination
-            return  sorted.Skip((pagination.CurrentPage - 1) * pagination.PageSize).Take(pagination.PageSize).ToList();
+            return new PaginationResponse<Product>
+            {
+                Result = sorted.Skip((pagination.CurrentPage - 1) * pagination.PageSize).Take(pagination.PageSize)
+                    .ToList(),
+                Count = count
+            };
         }
 
         public async Task<bool> Update(Product product)

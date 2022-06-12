@@ -11,7 +11,7 @@ namespace GameShop.Models.Service.Interface
         Task<bool> Create(Product product);
         Task<bool> Update(Product product);
         Task<bool> Delete(Product product);
-        Task<IList<Product>> GetPaginatedResult(PaginationDataTable pagination, ProductsFilterEntity filterEntity);
+        Task<PaginationResponse<Product>> GetPaginatedResult(PaginationDataTable pagination, ProductsFilterEntity filterEntity);
         Task<long> Count();
     }
 }
