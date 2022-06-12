@@ -1,0 +1,98 @@
+﻿@page
+@using GameShop.Models.Utils
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="first_screen">
+    <div class="my_container">
+        <div class="fs_inner common_part">
+            <div class="fs_align">
+                <div class="fs_title">
+                    GAMEbox
+                </div>
+                <div class="fs_sub_title">
+                    Твій надійний друг у світі ігор!
+                </div>
+                <a asp-page="/Catalog" class="button">Каталог</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="site_part">
+    <div class="part_inner">
+        <div class="part_title">Акції</div>
+
+        <div class="part_product">
+             @foreach (var item in Model.Product)
+             {
+                 <a asp-page="./Details" asp-route-id="@item.Id" class="pcard" title="@item.ProductName">
+                     <div class="pcard_inner">
+                         <img src="images/games/@item.ProductImage" class="pc_img" alt="Зображення для @item.ProductName">
+                         <div class="pc_back">
+                             <div class="pc_name">@item.ProductName.Cut(14)</div>
+                             <div class="pc_cost">$@item.ProductPrice</div>
+                         </div>
+                     </div>
+                 </a>
+             }
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="site_part">
+    <div class="part_inner">
+        <div class="part_title">Наші новинки</div>
+
+        <div class="part_product">
+            
+           @foreach (var item in Model.Product)
+                        {
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="pcard" title="@item.ProductName">
+                                <div class="pcard_inner">
+                                    <img src="images/games/@item.ProductImage" class="pc_img" alt="Зображення для @item.ProductName">
+                                    <div class="pc_back">
+                                        <div class="pc_name">@item.ProductName.Cut(14)</div>
+                                        <div class="pc_cost">$@item.ProductPrice</div>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+            
+        </div>
+
+    </div>
+</div>
+
+<div class="site_part">
+    <div class="part_inner">
+        <div class="part_title">Наші переваги</div>
+
+        <div class="part_benefits common_part">
+            <div class="first_benefit">
+                <img alt="Зірка" src="images/static/index/star.svg" class="benefits star">
+                <div class="benefit_text">
+                    <div class="benefit_title">Найкращий товар</div>
+                    <div class="benefit_content">
+                        Ми працюємо лише з перевіреними постачальниками.
+                    </div>
+                </div>
+            </div>
+            <div class="second_benefit">
+                <img alt="Вантажівка" src="images/static/index/van.svg" class="benefits van">
+                <div class="benefit_text">
+                    <div class="benefit_title">Швидка доставка</div>
+                    <div class="benefit_content">
+                        Ми працюємо лише з перевіреними постачальниками.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
