@@ -15,6 +15,8 @@ namespace GameShop.Models.Entity.RequestEntity
         public AgeRequestEntity[] Ages { get;  }
         public LangRequestEntity[] Langs { get;  }
 
+        public static ProductsFilterEntity Empty { get; }= new ProductsFilterEntity();
+
         private ProductsFilterEntity(ICollection<Product_Type> types)
         {
             Categories = new CategoryRequestEntity[types.Count];
@@ -62,6 +64,14 @@ namespace GameShop.Models.Entity.RequestEntity
                 item.IsChecked = langs.Contains(item.Id.ToString()) && QueryUtils.TryGetQueryParamCheckBox(query, "lang:" + item.Id.ToString(), item.IsChecked);
             }
         }
+
+        private ProductsFilterEntity()
+        {
+            Categories = Array.Empty<CategoryRequestEntity>();
+            Ages = Array.Empty<AgeRequestEntity>();
+            Langs = Array.Empty<LangRequestEntity>();
+        }
+
         public void Initialize()
         {
             IsSkipAge = EntityUtils.CheckEmptyListRequestEntities(Ages);
