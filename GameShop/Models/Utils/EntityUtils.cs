@@ -69,11 +69,17 @@ namespace GameShop.Models.Utils
                 case "Гральні кубики": return "kubiki.png";
                 default: throw new ArgumentException("You need to be adult");
             }
-            
-            
-            
-
-
+        }
+        public static string GetLanguage(this Product product)
+        {
+            Lang language = (Lang)Enum.Parse(typeof(Lang), product.Localisation);
+            switch (language)
+            {
+                case Lang.ENG: return "Англійська";
+                case Lang.UKR: return "Українська";
+                
+                default: throw new NotImplementedException("This language does not supported");
+            }
         }
     }
 }
