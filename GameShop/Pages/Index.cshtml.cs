@@ -22,9 +22,10 @@ namespace GameShop.Pages
         
         public async Task<IActionResult> OnGet()
         {
+            _logger.Log(LogLevel.Information,"Index OnGet started!");
             var all = await _productService.GetAll();
             Product =  all.Take(4).ToList();
-            
+            _logger.Log(LogLevel.Information,"Index OnGet successfully ended!");   
             return Page();
         }
     }
