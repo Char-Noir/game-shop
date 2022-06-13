@@ -54,5 +54,26 @@ namespace GameShop.Models.Utils
             var counter = bases.Count(item => !item.IsChecked);
             return counter == bases.Length;
         }
+
+        public static string GetImage(this Product_Type category)
+        {
+            switch (category.Name)
+            {
+                case "Сімейні": return "family.png";
+                case "Дитячі": return "child.png";
+                case "Для компанії": return "company.png";
+                case "Головоломки": return "brain.png";
+                case "Для двох": return "two.png";
+                case "Карткові": return "kartkovi.png";
+                case "Настільні": return "table.png";
+                case "Гральні кубики": return "kubiki.png";
+                default: throw new ArgumentException("You need to be adult");
+            }
+            
+            
+            
+
+
+        }
     }
 }

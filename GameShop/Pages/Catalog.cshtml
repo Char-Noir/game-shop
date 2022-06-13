@@ -1,0 +1,35 @@
+﻿@page
+@using GameShop.Models.Utils
+@model Catalog
+@{
+    ViewData["Title"] = "Каталог";
+}
+
+
+<div class="site_part">
+    <div class="part_inner">
+      <div class="part_title">Каталог</div>
+      <div class="part_product">
+        @foreach (var item in Model.Categories)
+        {
+          var a = new Dictionary<string, string> {{"category:"+@item.Id, "on"}};
+          <a asp-page="/Products/Index" asp-all-route-data='@a' title="@item.Name" class="pcard">
+            <div class="pcard_inner">
+              <img src="images\catalog\@item.GetImage()" class="pc_img" alt="Зображення для @item.Name">
+              <div class="cc_back">
+                <div class="pc_name">@item.Name</div>
+              </div>
+            </div>
+          </a>
+        }
+        
+
+      </div>
+
+    </div>
+
+    <div class="catalog_button">
+      <a asp-page="/Products/Index" class="button">Знайти всі жанри</a>
+    </div>
+
+  </div>
