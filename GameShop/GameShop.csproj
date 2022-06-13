@@ -72,6 +72,7 @@
     <None Include="wwwroot\images\catalog\two.png" />
     <None Include="wwwroot\images\static\Anna.jpg" />
     <None Include="wwwroot\images\static\Danila.jpg" />
+    <None Include="wwwroot\images\static\error.svg" />
     <None Include="wwwroot\images\static\index\fs_bc.png" />
     <None Include="wwwroot\images\static\index\star.svg" />
     <None Include="wwwroot\images\static\index\van.svg" />
