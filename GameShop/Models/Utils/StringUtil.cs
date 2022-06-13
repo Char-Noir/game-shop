@@ -11,7 +11,7 @@ namespace GameShop.Models.Utils
         }
         public static string Cut(this string txt,int end)
         {
-            return txt.Substring(0,end);
+            return txt.Length<end? txt : txt[..end];
         }
         public static string GenerateSlug(this string phrase)
         {
