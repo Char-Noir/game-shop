@@ -1,0 +1,246 @@
+﻿@page "{currentpage:int?}"
+@using GameShop.Models.Utils
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model GameShop.Pages.Products.Index
+
+@{
+    ViewData["Title"] = "Сторінка:" + Model.CurrentPage;
+}
+
+<form method="get" id="pagination_form" class="filtr">
+        <div class="site_part">
+            <div class="part_inner">
+                <div class="part_title">Всі товари</div>
+                <div class="part_filtr_html">
+                    <div class="part_filtr">
+                        <div class="filtr_part">
+                            <div class="filtr_title">Вартість</div>
+                            <div class="characteristic">
+                                <div id="slider-range" class="chrange"></div>
+                                <div class="chamount">
+                                    <input type="text" id="amount1" asp-for="FilterEntity.MinPrice" class="amount1" readonly style="border: 0; color: gray; font-weight: bold;">
+                                    <input type="text" id="amount2" asp-for="FilterEntity.MaxPrice" class="amount2" readonly style="border: 0; color: gray; font-weight: bold;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filtr_part">
+                            <div class="filtr_title">Мова</div>
+                            <div class="characteristic">
+                                <div class="two_columns">
+                                     @{
+                                         var с = Model.FilterEntity.Langs.Length;
+                                         var halfLang = (int) Math.Ceiling(decimal.Divide(с, 2.0m));
+                                     }
+                                     <div class="first_column column">
+                                         @for (var i = 0; i < halfLang; i++)
+                                         {
+                                             var item = Model.FilterEntity.Langs[i];
+                                             <div class="one_checkbox">
+                                                 <input type="checkbox" class="custom_checkbox" name="lang:@item.Id.ToString()" @(item.IsChecked?"checked":"")>
+                                                 <label for="scales">@item.Name</label>
+                                             </div>
+                                         }
+                                         
+                                     </div>
+                                     <div class="second_column column">
+                                        @for (var i = halfLang; i < с; i++)
+                                        {
+                                            var item = Model.FilterEntity.Langs[i];
+                                            <div class="one_checkbox">
+                                                <input type="checkbox" class="custom_checkbox" name="lang:@item.Id.ToString()" @(item.IsChecked?"checked":"")>
+                                                <label for="scales">@item.Name</label>
+                                            </div>
+                                        }
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filtr_part">
+                            <div class="filtr_title">Наявність</div>
+                            <div class="characteristic">
+                                <div class="two_columns">
+                                    <div class="first_column column">
+                                        <div class="one_checkbox">
+                                            <input type="checkbox" class="custom_checkbox" asp-for="FilterEntity.IsPresent">
+                                            <label for="scales">В наявності</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filtr_part">
+                            <div class="filtr_title">Вік</div>
+                            <div class="characteristic">
+                                <div class="two_columns">
+                                    @{
+                                        var b = Model.FilterEntity.Ages.Length;
+                                        var halfAge = (int) Math.Ceiling(decimal.Divide(b, 2.0m));
+                                    }
+                                    <div class="first_column column">
+                                        @for (var i = 0; i < halfAge; i++)
+                                        {
+                                            var item = Model.FilterEntity.Ages[i];
+                                            <div class="one_checkbox">
+                                                <input type="checkbox" class="custom_checkbox"  name="age:@item.Id.ToString()" @(item.IsChecked?"checked":"")>
+                                                <label for="scales">@item.Name</label>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="second_column column">
+                                       @for (var i = halfAge; i < b; i++)
+                                       {
+                                           var item = Model.FilterEntity.Ages[i];
+                                           <div class="one_checkbox">
+                                               <input type="checkbox" class="custom_checkbox"  name="age:@item.Id.ToString()" @(item.IsChecked?"checked":"")>
+                                               <label for="scales">@item.Name</label>
+                                               </div>
+                                       }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filtr_part">
+                            <div class="filtr_title">Жанр</div>
+                            <div class="characteristic">
+                                <div class="two_columns">
+                                    @{
+                                        var a = Model.FilterEntity.Categories.Length;
+                                        var halfCat = (int) Math.Ceiling(decimal.Divide(a, 2.0m));
+                                    }
+                                    <div class="first_column column">
+                                        @for (var i = 0; i < halfCat; i++)
+                                        {
+                                            var item = Model.FilterEntity.Categories[i];
+                                            <div class="one_checkbox">
+                                                <input type="checkbox" class="custom_checkbox" name="category:@item.Id" @(item.IsChecked?"checked":"")>
+                                                <label for="scales">@item.Name</label>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="second_column column">
+                                         @for (var i = halfCat; i < a; i++)
+                                         {
+                                             var item = Model.FilterEntity.Categories[i];
+                                             <div class="one_checkbox">
+                                                 <input type="checkbox" class="custom_checkbox" id="scales" name="category:@item.Id" @(item.IsChecked?"checked":"")>
+                                                 <label for="scales">@item.Name</label>
+                                                 </div>
+                                         }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="button fbutton">Застосувати фільтри</button>
+
+                    </div>
+
+                    <div class="part_filtr_product">
+                        <div class="part_form">
+                            <div id="here_select" class="filtr_form">
+                                <select class="mb-3 in_filtr" name="OrderBy" form="here_select">
+                                    @if (Model.OrderBy is "default" or "")
+                                    {
+                                        <option selected value="default">За замовчуванням</option>
+                                    }
+                                    else
+                                    {
+                                        <option>За замовчуванням</option>
+                                    }
+                                    @if (Model.OrderBy is "name" )
+                                    {
+                                        <option selected value="name">За назвою</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="name">За назвою</option>
+                                                                            
+                                    }
+                                    @if (Model.OrderBy is "ASC:price"  )
+                                    {
+                                        <option selected value="ASC:price">Ціна з маленького</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="ASC:price">Ціна з маленького</option>
+                                                                                                             
+                                    }
+                                    @if (Model.OrderBy is "DESC:price"  )
+                                    {
+                                        <option selected value="DESC:price">Ціна з великого</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="DESC:price">Ціна з великого</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="filtr_form">
+                                <div class="mb-3 in_filtr">
+                                    <button type="submit" id="filter_submit"><img src="/images/static/search.svg" alt="Зображення для Пошуку"></button>
+                                    <input type="search" asp-for="FilterEntity.SearchString" class="form-control"  aria-describedby="search" placeholder="Пошук">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="part_product">
+                             @foreach (var item in Model.Product)
+                             {
+                                 <a asp-page="Products/Details" asp-route-id="@item.Id" class="pcard" title="@item.ProductName">
+                                     <div class="pcard_inner">
+                                         <img src="/images/games/@item.ProductImage" class="pc_img" alt="Зображення для @item.ProductName">
+                                         <div class="pc_back">
+                                             <div class="pc_name">@item.ProductName.Cut(14)</div>
+                                             <div class="pc_cost">$@item.ProductPrice</div>
+                                         </div>
+                                     </div>
+                                 </a>
+                             }
+                        </div>
+
+                        <div class="i_justify">
+                            <ul>
+                                <li><a onclick="sendNewPage(1)" class="here_li @(!Model.ShowFirst? "disabled":"")"><<</a></li>
+                                <li><a onclick="sendNewPage(@(Model.CurrentPage-1))" class="here_li @(!Model.ShowPrevious? "disabled":"")"><</a></li>
+                                @foreach (var item in Model.PagesAvalible)
+                                {
+                                    <li><a onclick="sendNewPage(@(item)" class="here_li">@item</a></li>
+                                }
+                                <li><a onclick="sendNewPage(@(Model.CurrentPage+1))" class="here_li @(!Model.ShowNext? "disabled":"")">></a></li>
+                                <li><a onclick="sendNewPage(@(Model.TotalPages))" class="here_li @(!Model.ShowLast? "disabled":"")">>></a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    @section Scripts {
+        <script src="~/js/pagination.js"></script>
+        <script>
+            $( function() {
+                $( "#slider-range" ).slider({
+                    range: true,
+                    min: @Model.Prices.Item2,
+                    max: @Model.Prices.Item1,
+                    values: [ @Model.FilterEntity.MinPrice, @Model.FilterEntity.MaxPrice ],
+                    slide: function( event, ui ) {
+                        $( "#amount1" ).val( "Від $" + ui.values[ 0 ]);
+                        $( "#amount2" ).val( "До $" + ui.values[ 1 ]);
+                    }
+                });
+                $( "#amount1" ).val( "Від $" + $( "#slider-range" ).slider( "values", 0 ));
+                $( "#amount2" ).val( "До $" + $( "#slider-range" ).slider( "values", 1 ));
+            } );
+        </script>
+        <script>
+        $( "#pagination_form" ).submit(function( event ) {
+         $( "#amount1" ).val($( "#amount1" ).val().substring(5));
+         $( "#amount2" ).val($( "#amount2" ).val().substring(4));
+         return;
+        });
+        </script>
+    }
