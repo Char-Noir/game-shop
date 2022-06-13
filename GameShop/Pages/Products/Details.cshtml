@@ -67,11 +67,11 @@
           </div>
 
           <!-- Tab content -->
-          <div id="Opis" class="tabcontent">
+          <div id="Opis" class="tabcontent" >
             <p>@Model.Product.ProductDescription</p>
           </div>
 
-          <div id="Komplect" class="tabcontent">
+          <div id="Komplect" class="tabcontent" style="display: none">
             <p>@Html.Raw(Model.Product.PackageList)</p>
           </div>
 
@@ -83,6 +83,7 @@
 @section Scripts {
   <script>$('#exampleModalCenter').modal({show:false})</script>
   <script type="text/javascript">
+ 
     function openTab(evt, descriptionType) {
       let i, tabcontent, tablinks;
   
@@ -102,4 +103,10 @@
       evt.currentTarget.className += " active";
       }
     </script>
+    
+  <script>
+  
+  const d = document.getElementsByClassName("footer")[0];
+  d.className += " product_footer";
+  </script>
 }

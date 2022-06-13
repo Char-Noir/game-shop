@@ -43,8 +43,8 @@ namespace GameShop.Models.Entity.RequestEntity
         public ProductsFilterEntity(ICollection<Product_Type> types, IQueryCollection query) : this(types)
         {
             SearchString = QueryUtils.TryGetQueryParam(query, "FilterEntity.SearchString", SearchString);
-            MinPrice = QueryUtils.TryGetQueryParam(query, "FilterEntity.Min_price", MinPrice);
-            MaxPrice = QueryUtils.TryGetQueryParam(query, "FilterEntity.Max_price", MaxPrice);
+            MinPrice = QueryUtils.TryGetQueryParam(query, "FilterEntity.MinPrice", MinPrice);
+            MaxPrice = QueryUtils.TryGetQueryParam(query, "FilterEntity.MaxPrice", MaxPrice);
             IsPresent = QueryUtils.TryGetQueryParam(query, "FilterEntity.IsPresent", IsPresent);
 
             var keys = query.Keys;
