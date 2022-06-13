@@ -1,0 +1,441 @@
+// Основний код для всіх сторінок
+
+body {
+  background: white;
+  color: black;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px!important;
+}
+
+$bc_header: #1D78DD;
+$c_header: white;
+$bc_acsent: #FF5F00;
+$bc_sacsent: #FFD651;
+$bc_card: #E9E6FE;
+
+a{
+  text-decoration: none!important;
+}
+
+.button{
+  display: inline-block;
+  padding: 15px 60px;
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: $bc_acsent;
+  color: $c_header;
+  transition: .5s;
+  text-decoration: none;
+  text-align: center;
+  &:hover{
+    background-color: $bc_sacsent;
+    color: $bc_header;
+  }
+}
+
+.my_container {
+  width: 100%;
+  height: 100%;
+  padding: 0 8%;
+}
+
+.site_part{
+  width: 100%;
+  padding: 0 6%;
+}
+
+.header, .footer {
+  width: 100%;
+  background-color: $bc_header;
+  color: $c_header;
+}
+
+.header_inner, .footer_inner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.Logo{
+  width: 164px;
+  height: 32px;
+}
+
+nav {
+  margin: 0;
+  a {
+    color: $c_header;
+    margin: 0 30px;
+    text-decoration: none;
+  }
+  a:hover{
+    color: $bc_sacsent!important;
+  }
+}
+
+.cart, .user{
+  fill: white;
+  margin-left: 20px;
+}
+
+.cart:hover, .user:hover{
+  fill: $bc_sacsent;
+}
+
+.mb-3 {
+  margin-top: 1rem!important;
+  display: flex;
+  width: 20vw;
+  height: 36px;
+  border-radius: 5px;
+  .form-control{
+    width: calc(20vw - 40px);
+    border-radius: 0 5px 5px 0;
+    border: none;
+    &:active, &:hover, &:focus {
+      box-shadow: 3px 5px $bc_sacsent;
+    }
+  }
+
+  button {
+    width: 60px;
+    border: none;
+    background-color: white;
+    border-radius: 5px 0 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+      background-color: $bc_card;
+    }
+  }
+}
+
+.footer{
+  margin-top: 140px;
+  padding: 80px 0;
+}
+
+.footer_inner_additional{
+  padding-top: 32px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.head_icons{
+  display: flex;
+}
+
+.ficons{
+  width: 240px;
+  justify-content: space-around;
+}
+
+.avatars{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-size: contain;
+}
+
+.flogo{
+  width: 20%;
+}
+
+
+
+// Код для карточок продуктів та каталогу
+
+.part_product{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pcard{
+  width: calc(25% - 32px);
+  min-width: 240px;
+  max-height: 300px;
+  margin: 0 16px 40px 16px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.pcard_inner:hover{
+  transform: scale(1.02);
+}
+.pc_back, .cc_back{
+  width: 240px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: $bc_card;
+  padding: 0 16px;
+  border-radius: 0 0 16px 16px;
+}
+
+.pc_img{
+  width: 240px;
+  height: 240px;
+  background-size: cover;
+}
+
+.pc_name{
+  font-weight: 500;
+  color: black;
+}
+
+.pc_cost{
+  margin: 0 0 0 auto;
+  color: black;
+}
+
+.cc_back{
+  justify-content: center;
+}
+
+
+
+// Код головної сторинки
+
+.first_screen{
+  height: 460px;
+  background-image: url(../img/static/index/fs_bc.png);
+  background-size: cover;
+  color: $c_header;
+  width: 100%;
+}
+
+.fs_inner{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fs_align{
+  text-align: center;
+  .button{
+    margin-top: 30px;
+  }
+}
+
+.fs_title{
+  font-weight: bold;
+  font-size: 64px;
+}
+
+.part_inner{
+  padding-top: 50px;
+}
+
+.part_title{
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.part_benefits{
+  display: flex;
+  justify-content: center;
+}
+
+.first_benefit, .second_benefit{
+  display: flex;
+  align-items: center;
+  margin: 0 80px;
+}
+
+.star{
+  width: 52px;
+  height: 72px;
+}
+
+.van{
+  width: 72px;
+  height: 72px;
+}
+
+.benefit_text{
+  width: 240px;
+  margin-left: 30px;
+}
+
+.benefit_title{
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+
+
+// Код сторінки Каталог
+
+.catalog_button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+// Код сторінки Фільтрації
+
+.part_filtr_html{
+  display: flex;
+  justify-content: space-between;
+}
+
+.part_filtr{
+  width: 25%;
+  margin-top: 1rem!important;
+}
+
+.filtr_part{
+  margin-bottom: 32px;
+}
+
+.filtr_title{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 11px;
+}
+
+.chrange{
+  width: 86%!important;
+  margin-left: 10px;
+}
+
+.ui-widget-header{
+  background: $bc_acsent!important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default{
+  background: black!important;
+}
+
+.chamount{
+  width: 86%;
+  display: flex;
+  justify-content: space-between;
+  input{
+    text-align: center!important;
+  }
+  margin-top: 10px;
+}
+
+.amount1, .amount2{
+  margin: 0 auto;
+  width: 36%!important;
+  padding: 5px 10px;
+  border: 2px solid $bc_sacsent!important;
+  border-radius: 10px;
+  font-weight: 500!important;
+}
+
+.ui-slider .ui-slider-handle{
+  width: 10px!important;
+  border: none!important;
+}
+
+.custom_checkbox{
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  filter: none;
+  &:checked {
+    filter: invert(100%) hue-rotate(16deg) brightness(1.2);
+  }
+}
+
+.two_columns{
+  display: flex;
+}
+
+.column{
+  width: 50%;
+}
+
+.one_checkbox{
+  display: flex;
+  align-items: center;
+}
+
+
+.part_filtr_product{
+  max-width: 70%;
+  margin-left: 5%;
+}
+
+.part_form{
+  display: flex;
+  margin-left: 28px;
+  margin-bottom: 36px;
+}
+
+select{
+  padding: 0 18px;
+}
+
+.filtr_form{
+  width: 20vw;
+  margin-right: 20px;
+}
+
+.in_filtr{
+  border: 2px solid $bc_sacsent;
+  height: 54px;
+}
+
+.fpcard{
+  width: calc((100% / 3) - 32px);
+  min-width: 240px;
+  max-height: 300px;
+  margin: 0 16px 40px 16px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.i_justify{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.fbutton{
+  margin-top: 36px;
+}
+
+ul{
+  margin: 24px 0 0 0!important;
+  padding: 0!important;
+  display: flex;
+  li{
+    list-style: none;
+    a{
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 40px;
+      color: black;
+      margin: 5px;
+      border-radius: 4px;
+      border: 2px solid $bc_sacsent;
+
+      &:hover{
+        background: $bc_acsent;
+        color: $c_header;
+        border: none;
+      }
+    }
+  }
+}
