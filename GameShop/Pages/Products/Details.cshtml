@@ -1,0 +1,105 @@
+﻿@page
+@using GameShop.Models.Utils
+@model GameShop.Pages.Products.DetailsModel
+
+@{
+    ViewData["Title"] = Model.Product.ProductName;
+}
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Додати в кошик</h5>
+                <button type="button" class="close" data-dismiss="modal"    onclick="$('#exampleModalCenter').modal('hide')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Тут потім буде можливість додати в кошик.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"    onclick="$('#exampleModalCenter').modal('hide')">Зачинити</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="site_part">
+        <div class="part_inner">
+          <div class="ppage">
+            <img src="/images/games/@Model.Product.ProductImage" alt="Зображення для @Model.Product.Id" class="product_img">
+            <div class="p_stick">
+              <div class="product_title">@Model.Product.ProductName</div>
+              <div class="p_charact">
+                <div class="one_charact">
+                  <img src="/images/static/gamedetails/history.svg" alt="Час гри" class="charact_img">
+                  <div class="charact_text">@Model.Product.GameDuration</div>
+                </div>
+                <div class="one_charact">
+                  <img src="/images/static/gamedetails/users.svg" alt="Кількість гравців" class="charact_img">
+                  <div class="charact_text">@Model.Product.NumOfPlayers</div>
+                </div>
+                <div class="one_charact">
+                  <img src="/images/static/gamedetails/face.svg" alt="Від років" class="charact_img">
+                  <div class="charact_text">@Model.Product.Age</div>
+                </div>
+                <div class="one_charact">
+                  <img src="/images/static/gamedetails\globe.svg" alt="Локалізація" class="charact_img">
+                  <div class="charact_text">@Model.Product.GetLanguage()</div>
+                </div>
+              </div>
+
+              <div class="p_price">
+                @Model.Product.ProductPrice грн
+              </div>
+              <button href="#" class="button" onclick="$('#exampleModalCenter').modal('show')">До кошика</button>
+            </div>
+
+
+          </div>
+
+          <!-- Tab links -->
+          <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'Opis')">Опис</button>
+            <button class="tablinks" onclick="openTab(event, 'Komplect')">Комплектація</button>
+          </div>
+
+          <!-- Tab content -->
+          <div id="Opis" class="tabcontent">
+            <p>@Model.Product.ProductDescription</p>
+          </div>
+
+          <div id="Komplect" class="tabcontent">
+            <p>@Html.Raw(Model.Product.PackageList)</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="white_space">Here is smth</div>
+      
+@section Scripts {
+  <script>$('#exampleModalCenter').modal({show:false})</script>
+  <script type="text/javascript">
+    function openTab(evt, descriptionType) {
+      let i, tabcontent, tablinks;
+  
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+  
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+  
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(descriptionType).style.display = "block";
+      evt.currentTarget.className += " active";
+      }
+    </script>
+}
