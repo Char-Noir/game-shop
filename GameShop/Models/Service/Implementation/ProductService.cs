@@ -179,6 +179,7 @@ namespace GameShop.Models.Service.Implementation
             }
             var count = sorted.Count; 
             var totalPages = Util.CeilToOne(decimal.Divide(sorted.Count, pagination.PageSize));//if no items in pagination data we still can access to first page
+            var prices = (_context.Product.Max(p => p.ProductPrice), _context.Product.Min(p => p.ProductPrice));
             
             if (pagination.CurrentPage > totalPages)
             {
@@ -191,7 +192,8 @@ namespace GameShop.Models.Service.Implementation
                 {
                     Result = sorted.Skip((pagination.CurrentPage - 1) * pagination.PageSize).Take(pagination.PageSize)
                         .ToList(),
-                    Count = count
+                    Count = count,
+                    Prices = prices
                 };
             
             if (pagination.Order == Order.ASC)
@@ -220,7 +222,8 @@ namespace GameShop.Models.Service.Implementation
             {
                 Result = sorted.Skip((pagination.CurrentPage - 1) * pagination.PageSize).Take(pagination.PageSize)
                     .ToList(),
-                Count = count
+                Count = count,
+                Prices = prices
             };
         }
 

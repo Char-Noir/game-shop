@@ -16,5 +16,7 @@ namespace GameShop.Models.Utils.Pagination
         public bool ShowNext => CurrentPage < TotalPages;
         public bool ShowFirst => CurrentPage != 1;
         public bool ShowLast => CurrentPage != TotalPages;
+
+        public int[] PagesAvalible => PaginationUtil.GetAvaliablePages(TotalPages, CurrentPage);
     }
 }
