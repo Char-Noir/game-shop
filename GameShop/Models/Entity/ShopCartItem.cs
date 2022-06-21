@@ -7,7 +7,6 @@
         //товар
         public Product Product { get; set; }
         public double Price { get; set; }
-        public ShopCart ShopCart { get; set; }
         //количество товара
         public int PAmount { get; set; }
 
@@ -16,7 +15,6 @@
             Id = id;
             Product = product;
             Price = price;
-            ShopCart = shopCart;
             PAmount = p_amount;
         }
 

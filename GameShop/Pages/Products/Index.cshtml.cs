@@ -31,7 +31,7 @@ public class Index : PaginationModel
         _logger.Log(LogLevel.Information,"Products index OnGet started!");
         Categories = await _productTypeService.GetAll();
         FilterEntity = new ProductsFilterEntity(Categories, Request.Query);
-        var paginationDataTable = new PaginationDataTable { CurrentPage = CurrentPage, PageSize=PageSize , OrderBy = OrderBy};
+        var paginationDataTable = new PaginationDataTable(OrderBy) { CurrentPage = CurrentPage, PageSize=PageSize};
         try
         {
             var response = await _productService.GetPaginatedResult(paginationDataTable, FilterEntity);

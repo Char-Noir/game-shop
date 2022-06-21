@@ -138,14 +138,14 @@
                     <div class="part_filtr_product">
                         <div class="part_form">
                             <div id="here_select" class="filtr_form">
-                                <select class="mb-3 in_filtr" name="OrderBy" form="here_select">
+                                <select class="mb-3 in_filtr" name="OrderBy">
                                     @if (Model.OrderBy is "default" or "")
                                     {
                                         <option selected value="default">За замовчуванням</option>
                                     }
                                     else
                                     {
-                                        <option>За замовчуванням</option>
+                                        <option value="default">За замовчуванням</option>
                                     }
                                     @if (Model.OrderBy is "name" )
                                     {
@@ -204,7 +204,7 @@
                                 <li><a onclick="sendNewPage(@(Model.CurrentPage-1))" class="here_li @(!Model.ShowPrevious? "disabled":"")"><</a></li>
                                 @foreach (var item in Model.PagesAvalible)
                                 {
-                                    <li><a onclick="sendNewPage(@(item)" class="here_li">@item</a></li>
+                                    <li><a onclick="sendNewPage(@(item))" class="here_li">@item</a></li>
                                 }
                                 <li><a onclick="sendNewPage(@(Model.CurrentPage+1))" class="here_li @(!Model.ShowNext? "disabled":"")">></a></li>
                                 <li><a onclick="sendNewPage(@(Model.TotalPages))" class="here_li @(!Model.ShowLast? "disabled":"")">>></a></li>

@@ -7,7 +7,7 @@
 }
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <form action="/ShopCarts/Add" method="post" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Додати в кошик</h5>
                 <button type="button" class="close" data-dismiss="modal"    onclick="$('#exampleModalCenter').modal('hide')" aria-label="Close">
@@ -15,13 +15,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                Тут потім буде можливість додати в кошик.
+              <input name="quantity" min="1" value="1" type="number"/>
+              <input name="product" value="@Model.Product.Id" type="hidden"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"    onclick="$('#exampleModalCenter').modal('hide')">Зачинити</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Зберегти</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

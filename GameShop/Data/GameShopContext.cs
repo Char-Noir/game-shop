@@ -17,5 +17,8 @@ namespace GameShop.Data
         public DbSet<ProductType> Product_Type { get; set; }
         public DbSet<Product_Type> ProductType { get; set; }
         public DbSet<WarhouseItem> WarhouseItem { get; set; }
+        public DbSet<GameShop.Models.Entity.User> MyUser { get; set; }
+        public DbSet<ShopCart> ShopCart { get; set; }
+        public DbSet<ShopCartItem> ShopCartItem { get; set; }
     }
 }

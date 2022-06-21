@@ -69,7 +69,7 @@ namespace GameShop.Models.Service.Implementation
             return await _context.Product.ToListAsync();
         }
 
-        public async Task<Product> GetById(int id)
+        public async Task<Product> GetById(long id)
         {
             var product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 

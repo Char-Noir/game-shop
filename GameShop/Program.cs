@@ -1,9 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using GameShop.Data;
 using GameShop.Models.Service.Interface;
 using GameShop.Models.Service.Implementation;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("GameShopContextConnection") ?? throw new InvalidOperationException("Connection string 'GameShopContextConnection' not found.");
+
+builder.Services.AddDbContext<GameShopContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<GameShopContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -14,6 +24,9 @@ builder.Services.AddDbContext<GameShopContext>(options =>
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IShopCartService, ShopCartService>();
+builder.Services.AddScoped<IEmailSender, GmailSender>();
 
 
 var app = builder.Build();
@@ -29,7 +42,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();

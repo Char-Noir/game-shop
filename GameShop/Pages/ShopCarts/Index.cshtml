@@ -1,0 +1,72 @@
+﻿@page
+@using GameShop.Models.Entity
+@model GameShop.Pages.ShopCarts.Index
+
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+@if(Model.ShopCart.ListShopItems.Count == 0){
+<div class="alert alert-info centr">
+    <strong>Вибачте але ваша корзина порожня</strong>
+</div>
+}
+else
+{
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Товар</th>
+            <th scope="col">Кількість</th>
+            <th scope="col">Ціна</th>
+            <th scope="col">Видалити</th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            var price = 0.0d;
+        }
+        @foreach (var myItem in Model.ShopCart.ListShopItems.Select((value,i) => new {i, value}))
+        {
+            <tr id="@myItem.value.Id">
+                <th scope="row">@myItem.i</th>
+                <td>@myItem.value.Product.ProductName</td>
+                <td>
+                    <form action="/ShopCarts/Update" method="post">
+                        <input value="@myItem.value.Product.Id" type="hidden" name="product"/>
+                        <input class="inputter" value="@myItem.value.PAmount" type="number" min="1" name="quantity"/>
+                    </form>
+                </td>
+                <td>@(myItem.value.PAmount*myItem.value.Product.ProductPrice)</td>
+                <td>
+                    <form action="/ShopCarts/Delete" method="post">
+                        <input value="@myItem.value.Product.Id" type="hidden" name="product"/>
+                        <button type="submit" class="btn btn-danger">Видалити</button>
+                    </form>
+                </td>
+                @(price = price + myItem.value.PAmount*myItem.value.Product.ProductPrice);
+            </tr>
+        }
+        <tr>
+            <th scope="row"></th>
+            <td colspan="2">Усього</td>
+            <td>@price</td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/ShopCarts/Clear" method="post">
+        <button type="submit" class="btn btn-danger">Очистити корзину</button>
+    </form>
+}
+<script>
+$(document).ready(function() {
+    $('.inputter').keyup(function(event) {
+        if (event.which === 13)
+        {
+            event.preventDefault();
+            $(this).closest('form').submit();
+        }
+    });
+});
+</script>

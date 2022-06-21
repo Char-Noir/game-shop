@@ -7,7 +7,7 @@ namespace GameShop.Models.Service.Interface
     public interface IProductService
     {
         Task<IList<Product>>  GetAll();
-        Task<Product> GetById(int id);
+        Task<Product> GetById(long id);
         Task<bool> Create(Product product);
         Task<bool> Update(Product product);
         Task<bool> Delete(Product product);
