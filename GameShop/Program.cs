@@ -12,7 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("GameShopContex
 builder.Services.AddDbContext<GameShopContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GameShopContext>();
 
 // Add services to the container.
@@ -27,7 +27,7 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IShopCartService, ShopCartService>();
 builder.Services.AddScoped<IEmailSender, GmailSender>();
-
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 
@@ -49,4 +49,23 @@ app.MapRazorPages();
 
 
 app.UseStatusCodePagesWithReExecute("/NotFound");
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var userService = services.GetRequiredService<IUserService>();
+        await RoleInitializer.InitializeAsync(userManager,roleManager, userService);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred creating the DB.");
+    }
+}
+
+
 app.Run();

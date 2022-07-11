@@ -1,0 +1,99 @@
+﻿@page
+@using GameShop.Models.Utils
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model GameShop.Pages.Admin.Orders.DetailsModel
+
+@{
+    ViewData["Title"] = "Деталі замовлення";
+}
+
+<h1>Замовлення номер #@Model.Orders.Id</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Дата замовлення:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Orders.OrderDate)
+        </dd>
+        <dt class="col-sm-2">
+            Кому:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Orders.ToName)
+        </dd>
+        <dt class="col-sm-2">
+            Телефон отримувача:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Orders.ToTelno)
+        </dd>
+        <dt class="col-sm-2">
+            Електронна пошта:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Orders.ToEmail)
+        </dd>
+        <dt class="col-sm-2">
+            Адреса:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Orders.Address)
+        </dd>
+        <dt class="col-sm-2">
+            Статус замовлення:
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Orders.OrderStatus.Name()
+        </dd>
+        <dt class="col-sm-2">
+            Оплата:
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Orders.Payment.Name()
+        </dd>
+    </dl>
+</div>
+
+<table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Товар</th>
+                        <th scope="col">Кількість</th>
+                        <th scope="col">Ціна</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var price = 0.0d;
+                    }
+                    @foreach (var myItem in Model.Orders.OrderDetails.Select((value,i) => new {i, value}))
+                    {
+                        <tr id="@myItem.value.Id">
+                            <th scope="row">@(myItem.i+1)</th>
+                            <td>@myItem.value.Product.ProductName</td>
+                            <td>@myItem.value.Quantity</td>
+                            <td>@(myItem.value.Quantity*myItem.value.Product.ProductPrice)</td>
+                            @{
+                                price += myItem.value.Quantity * myItem.value.Product.ProductPrice;
+                            }
+                        </tr>
+                    }
+                    <tr>
+                        <th scope="row"></th>
+                        <td colspan="2">Усього</td>
+                        <td>@price</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+<div>
+    
+        <a asp-page="./Edit" asp-route-id="@Model.Orders?.Id">Змінити статус</a>
+    
+    
+    <a asp-page="./Index">Повернутися</a>
+</div>

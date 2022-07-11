@@ -1,0 +1,145 @@
+﻿@page
+@model GameShop.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Додати";
+}
+
+<h1>Додати</h1>
+
+<h4>Товар</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" id="createForm" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Product.ProductName" class="control-label"></label>
+                <input asp-for="Product.ProductName" class="form-control" />
+                <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductPrice" class="control-label"></label>
+                <input asp-for="Product.ProductPrice" class="form-control" />
+                <span asp-validation-for="Product.ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductDescription" class="control-label"></label>
+                <input asp-for="Product.ProductDescription" class="form-control" />
+                <span asp-validation-for="Product.ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.GameDuration" class="control-label"></label>
+                <input asp-for="Product.GameDuration" class="form-control" />
+                <span asp-validation-for="Product.GameDuration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Age" class="control-label"></label>
+                <input asp-for="Product.Age" class="form-control" />
+                <span asp-validation-for="Product.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.WarhouseItem.ProductAmount" class="control-label"></label>
+                <input asp-for="Product.WarhouseItem.ProductAmount" class="form-control" />
+                <span asp-validation-for="Product.WarhouseItem.ProductAmount" class="text-danger"></span>
+                <span class="text-danger">@Html.ValidationMessage("NoAmount")</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.NumOfPlayers" class="control-label"></label>
+                <input asp-for="Product.NumOfPlayers" class="form-control" />
+                <span asp-validation-for="Product.NumOfPlayers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Localisation" class="control-label"></label>
+                <input asp-for="Product.Localisation" class="form-control" />
+                <span asp-validation-for="Product.Localisation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.PackageList" class="control-label"></label>
+                <input asp-for="Product.PackageList" class="form-control" />
+                <span asp-validation-for="Product.PackageList" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductImage" class="control-label"></label>
+                <input type="file" id="fileInputter" asp-for="Upload" required />
+                <input asp-for="Product.ProductImage" type="hidden" class="form-control" id="imageFile" />
+                <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product._productTypes" class="control-label"></label>
+                <div id="Tasks" style="margin-top:10px">
+
+                    @foreach (var item in Model.Types)
+                    {
+                        <input type="checkbox" data-name="@item.Name" class="checkboxTypes">
+
+                        @item.Name
+                    }
+                </div>
+                <span align="center" class="text-danger">@Html.ValidationMessage("NoType")</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Chars" class="control-label"></label>
+                <input asp-for="Product.Chars" class="form-control" />
+                <span asp-validation-for="Product.Chars" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $('#fileInputter').on("change", function() {
+            if ($('#fileInputter').get(0).files.length === 0) {
+                document.getElementById('imageFile').value = ''
+            } else {
+                document.getElementById('imageFile').value = 'true'
+            }
+
+        });
+        let count = 1;
+        $("#createForm").on("submit", function() {
+
+            let htmlString = "";
+            $(".checkboxTypes").each(function() {
+                if ($(this).is(':checked')) {
+                    htmlString += "<input type='text' type='hidden' value='" + $(this).data("name") + "' name='Product._productTypes[" + (count - 1) + "].Name' required='required'>";
+                    count++;
+                }
+            })
+            $("#Tasks").append(htmlString);
+        })
+
+        $("#addTask").on("click", function() {
+            let htmlString = "<div class='taskRow'><label>Task" + count + "</label>";
+            htmlString += "<input type='text' name='Product._productTypes[" + (count - 1) + "].Name' required='required'>";
+            htmlString += "<button class='btn btn-danger' style='padding-top:1px' onclick='deleteRow(this)' value='" + (count - 1) + "'>-</button></div>"
+            $("#Tasks").append(htmlString);
+            count++;
+        })
+
+        function deleteRow(element) {
+            let currentRow = parseInt($(element).val());
+            let nextSiblings = document.querySelectorAll('.taskRow:nth-child(' + (currentRow + 1) + ') ~ *');
+            for (let i = 0; i < nextSiblings.length; i++) {
+                const childElements = nextSiblings[i].children;
+                childElements[0].textContent = "Task" + (currentRow + 1);
+                childElements[1].setAttribute("name", "Product._productTypes[" + currentRow + "].Name");
+                childElements[3].setAttribute("value", String(currentRow))
+                currentRow++;
+            }
+            $(element).parent("div").remove();
+            count--;
+        }
+    </script>
+}

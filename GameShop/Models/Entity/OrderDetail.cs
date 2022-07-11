@@ -6,6 +6,7 @@
         public long Id { get; set; }
         public double Price { get; set; }
         public Product Product { get; set; }
+        public int Quantity { get; set; }
         public Orders Order { get; set; }
 
         public OrderDetail()

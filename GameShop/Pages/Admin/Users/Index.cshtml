@@ -1,0 +1,58 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model GameShop.Pages.Admin.Users.IndexModel
+@{
+    ViewData["Title"] =  "Користувачі";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ім'я
+            </th>
+            <th>
+                Електронна пошта
+            </th>
+            <th>
+                Номер телефону
+            </th>
+            <th>
+                Пошта підтверджена
+            </th>
+            <th>
+                Ролі
+            </th>
+            <th>
+                Деталі
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ComplexUsers) {
+        <tr>
+            <td>
+                @item.User.Name
+            </td>
+            <td>
+               @item.IdentityUser.Email
+            </td>
+            <td>
+               @item.IdentityUser.PhoneNumber
+            </td>
+            <td>
+               @item.IdentityUser.EmailConfirmed
+            </td>
+            <td>
+                <span>
+                 @foreach (var role in item.Roles){
+                     <b>@role</b>
+                 }
+            </span>
+                </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.User.Id">Деталі</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

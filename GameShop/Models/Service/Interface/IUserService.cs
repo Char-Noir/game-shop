@@ -11,5 +11,6 @@ namespace GameShop.Models.Service.Interface
         public Task<bool> Create(User user);
         public Task<bool> Update(User user);
         public Task<bool> Delete(long id);
+        public Task<int> Count();
     }
 }

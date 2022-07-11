@@ -13,4 +13,13 @@
     }
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Дво-факторна авторизація</a></li>
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Особисті дані</a></li>
+    <li class="nav-item width-275"><a class="nav-link width-275" id="logout" href="../Logout">Вийти з аккаунта</a></li>
+    @if (User.IsInRole("admin"))
+    {
+         <li class="nav-item width-275"><a class="nav-link width-275" id="admin" asp-page="/Admin/Dashboard">Панель адміністратора</a></li>
+    }
+    @if (User.IsInRole("manager"))
+        {
+             <li class="nav-item width-275"><a class="nav-link width-275" id="admin" asp-page="/Admin/Dashboard">Панель менеджера</a></li>
+        }
 </ul>

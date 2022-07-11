@@ -5,26 +5,30 @@
 @{
     ViewData["Title"] = Model.Product.ProductName;
 }
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <form action="/ShopCarts/Add" method="post" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Додати в кошик</h5>
-                <button type="button" class="close" data-dismiss="modal"    onclick="$('#exampleModalCenter').modal('hide')" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-              <input name="quantity" min="1" value="1" type="number"/>
-              <input name="product" value="@Model.Product.Id" type="hidden"/>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"    onclick="$('#exampleModalCenter').modal('hide')">Зачинити</button>
-                <button type="submit" class="btn btn-primary">Зберегти</button>
-            </div>
-        </form>
-    </div>
-</div>
+
+ @if (User.Identity?.IsAuthenticated ?? false)
+ {
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+       <form action="/ShopCarts/Add" method="post" class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLongTitle">Додати в кошик</h5>
+           <button type="button" class="close" data-dismiss="modal" onclick="$('#exampleModalCenter').modal('hide')" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body">
+           <input name="quantity" min="1" value="1" type="number"/>
+           <input name="product" value="@Model.Product.Id" type="hidden"/>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" onclick="$('#exampleModalCenter').modal('hide')">Зачинити</button>
+           <button type="submit" class="btn btn-primary">Зберегти</button>
+         </div>
+       </form>
+     </div>
+   </div>
+ }
 
 
 <div class="site_part">
@@ -55,7 +59,15 @@
               <div class="p_price">
                 @Model.Product.ProductPrice грн
               </div>
-              <button href="#" class="button" onclick="$('#exampleModalCenter').modal('show')">До кошика</button>
+              @if (User.Identity?.IsAuthenticated ?? false)
+              {
+                <button  class="button" onclick="$('#exampleModalCenter').modal('show')">До кошика</button>
+              }
+              else
+              {
+                <a asp-page="/Account/Login/" class="button" >Спочатку увійдіть</a>
+              }
+             
             </div>
 
 

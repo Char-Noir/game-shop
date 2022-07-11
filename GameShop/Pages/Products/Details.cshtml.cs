@@ -19,7 +19,7 @@ namespace GameShop.Pages.Products
 
         public Product Product { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(long? id)
+        public async Task<IActionResult> OnGetAsync(long id)
         {
             if (id == null)
             {

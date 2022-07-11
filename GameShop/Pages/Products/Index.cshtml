@@ -200,14 +200,17 @@
 
                         <div class="i_justify">
                             <ul>
-                                <li><a onclick="sendNewPage(1)" class="here_li @(!Model.ShowFirst? "disabled":"")"><<</a></li>
-                                <li><a onclick="sendNewPage(@(Model.CurrentPage-1))" class="here_li @(!Model.ShowPrevious? "disabled":"")"><</a></li>
+                                <li><a @(!Model.ShowFirst? "":"onclick='sendNewPage(1)'")  class="here_li @(!Model.ShowFirst? "disabled":"")"><<</a></li>
+                                <li><a @(!Model.ShowPrevious? "":"onclick='sendNewPage("+(Model.CurrentPage-1)+")'")
+                                        class="here_li @(!Model.ShowPrevious? "disabled":"")"><</a></li>
                                 @foreach (var item in Model.PagesAvalible)
                                 {
                                     <li><a onclick="sendNewPage(@(item))" class="here_li">@item</a></li>
                                 }
-                                <li><a onclick="sendNewPage(@(Model.CurrentPage+1))" class="here_li @(!Model.ShowNext? "disabled":"")">></a></li>
-                                <li><a onclick="sendNewPage(@(Model.TotalPages))" class="here_li @(!Model.ShowLast? "disabled":"")">>></a></li>
+                                <li><a @(!Model.ShowNext? "":"onclick='sendNewPage("+(Model.CurrentPage+1)+")'")
+                                        class="here_li @(!Model.ShowNext? "disabled":"")">></a></li>
+                                <li><a @(!Model.ShowLast? "":"onclick='sendNewPage("+(Model.TotalPages)+")'")
+                                        class="here_li @(!Model.ShowLast? "disabled":"")">>></a></li>
                             </ul>
 
                         </div>

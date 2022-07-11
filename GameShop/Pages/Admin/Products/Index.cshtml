@@ -1,0 +1,46 @@
+﻿@page
+@model GameShop.Pages.Admin.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Товари";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Створити новий</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Назва
+            </th>
+            <th>
+                Ціна
+            </th>
+            <th>
+               Кількість на складі
+            </th>
+            <th>Деталі</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Product) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductPrice)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.WarhouseItem.ProductAmount)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">Деталі</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

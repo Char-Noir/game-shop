@@ -66,7 +66,7 @@ namespace GameShop.Models.Service.Implementation
 
         public async Task<IList<Product>> GetAll()
         {
-            return await _context.Product.ToListAsync();
+            return await _context.Product.Include(p=>p.WarhouseItem).ToListAsync();
         }
 
         public async Task<Product> GetById(long id)

@@ -1,0 +1,108 @@
+﻿@page
+@model GameShop.Pages.Admin.DashboardModel
+@{
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"/>
+
+<div class="col-md-10 ">
+    <div class="row ">
+
+        <a href="./Orders" class="col-xl-3 col-lg-6">
+            <div class="card l-bg-cherry">
+                <div class="card-statistic-3 p-4">
+                    <div class="card-icon card-icon-large">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="card-title mb-0">Замовлення</h5>
+                    </div>
+                    <div class="row align-items-center mb-2 d-flex">
+                        <div class="col-8">
+                            <h2 class="d-flex align-items-center mb-0">
+                                @(Model.Orders == 0 ? "Немає" : Model.Orders)
+                            </h2>
+                        </div>
+                        <div class="col-4 text-right">
+                            <span>@(Double.IsNaN(Model.OrderPercentage) ? "Немає" : Model.OrderPercentage)% <i class="fa fa-arrow-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                        <div class="progress-bar l-bg-cyan" role="progressbar" data-width="@Model.OrderPercentage%" aria-valuenow="@Model.OrderPercentage" aria-valuemin="0" aria-valuemax="100" style="width: @Model.OrderPercentage%;"></div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        @if (User.IsInRole("admin"))
+        {
+            <a href="./Users/Index" class="col-xl-3 col-lg-6">
+                <div class="card l-bg-blue-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0">Користувачі</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    @Model.Customers
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="./Products" class="col-xl-3 col-lg-6">
+                <div class="card l-bg-green-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0">Товарів</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    @Model.Products
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>@Model.ProductPercentage% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                            <div class="progress-bar l-bg-orange" role="progressbar" data-width="@Model.ProductPercentage%" aria-valuenow="@Model.ProductPercentage" aria-valuemin="0" aria-valuemax="100" style="width: @Model.ProductPercentage%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="./Products" class="col-xl-3 col-lg-6">
+                <div class="card l-bg-orange-dark">
+                    <div class="card-statistic-3 p-4">
+                        <div class="card-icon card-icon-large">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="mb-4">
+                            <h5 class="card-title mb-0">На складі</h5>
+                        </div>
+                        <div class="row align-items-center mb-2 d-flex">
+                            <div class="col-8">
+                                <h2 class="d-flex align-items-center mb-0">
+                                    @Model.Warehouse
+                                </h2>
+                            </div>
+                            <div class="col-4 text-right">
+                                <span>@Model.WarehousePercentage% <i class="fa fa-arrow-up"></i></span>
+                            </div>
+                        </div>
+                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                            <div class="progress-bar l-bg-cyan" role="progressbar" data-width="@Model.WarehousePercentage%" aria-valuenow="@Model.WarehousePercentage" aria-valuemin="0" aria-valuemax="100" style="width: @Model.WarehousePercentage%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>

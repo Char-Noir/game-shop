@@ -1,10 +1,12 @@
 using GameShop.Models.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GameShop.Pages.ShopCarts
 {
+    [Authorize]
     [IgnoreAntiforgeryToken]
     public class ClearModel : PageModel
     {
@@ -33,7 +35,7 @@ namespace GameShop.Pages.ShopCarts
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Не вдалося завантажити користувача з таким ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ ID '{_userManager.GetUserId(User)}'.");
             }
             var myUser = await _userService.GetUserByIdentity(user);
             await _shopCartService.ClearCart(myUser);

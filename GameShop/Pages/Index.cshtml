@@ -52,7 +52,7 @@
         <div class="part_product">
             
            @foreach (var item in Model.Product)
-                        {
+           {
                             <a asp-page="Products/Details" asp-route-id="@item.Id" class="pcard " title="@item.ProductName">
                                 <div class="pcard_inner">
                                     <img src="images/games/@item.ProductImage" class="pc_img" alt="Зображення для @item.ProductName">
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </a>
-                        }
+           }
             
         </div>
 

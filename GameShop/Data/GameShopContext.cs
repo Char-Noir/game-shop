@@ -1,4 +1,4 @@
-﻿#nullable disable
+#nullable disable
 using GameShop.Models.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -20,5 +20,7 @@ namespace GameShop.Data
         public DbSet<GameShop.Models.Entity.User> MyUser { get; set; }
         public DbSet<ShopCart> ShopCart { get; set; }
         public DbSet<ShopCartItem> ShopCartItem { get; set; }
+        public DbSet<GameShop.Models.Entity.Orders> Orders { get; set; }
+        public DbSet<GameShop.Models.Entity.OrderDetail> OrderDetails { get; set; }
     }
 }

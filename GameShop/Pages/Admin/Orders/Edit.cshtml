@@ -1,0 +1,44 @@
+﻿@page
+@model GameShop.Pages.Admin.Orders.EditModel
+
+@{
+    ViewData["Title"] = "Змінити статус";
+}
+
+<h1>Замовлення номер </h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <select asp-for="OrderStatus" class="form-control">
+                    <option value="CREATED">Створено</option>
+                    <option value="PAYED">Сплачено</option>
+                    <option value="MANAGED">Опрацьовано</option>
+                    <option value="QUESTIONS">Виникли питання</option>
+                    <option value="PACKING">Пакується</option>
+                    <option value="DELIVERING">Передано до доставки</option>
+                    <option value="DELIVERED">Доставлено</option>
+                    <option value="CANCELED">Скасовано</option>
+                </select>
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Змінити статус" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Повернутися</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,88 @@
+﻿@page
+@model GameShop.Pages.Products.EditModel
+
+@{
+    ViewData["Title"] = @Model.Product;
+}
+
+<h1>Редагування</h1>
+
+<h4>Товар</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.Id" />
+            <div class="form-group">
+                <label asp-for="Product.ProductName" class="control-label"></label>
+                <input asp-for="Product.ProductName" class="form-control" />
+                <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductPrice" class="control-label"></label>
+                <input asp-for="Product.ProductPrice" class="form-control" />
+                <span asp-validation-for="Product.ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductDescription" class="control-label"></label>
+                <input asp-for="Product.ProductDescription" class="form-control" />
+                <span asp-validation-for="Product.ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.GameDuration" class="control-label"></label>
+                <input asp-for="Product.GameDuration" class="form-control" />
+                <span asp-validation-for="Product.GameDuration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.WarhouseItem.ProductAmount" class="control-label"></label>
+                <input asp-for="Product.WarhouseItem.ProductAmount" class="form-control" />
+                <span asp-validation-for="Product.WarhouseItem.ProductAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Age" class="control-label"></label>
+                <input asp-for="Product.Age" class="form-control" />
+                <span asp-validation-for="Product.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.NumOfPlayers" class="control-label"></label>
+                <input asp-for="Product.NumOfPlayers" class="form-control" />
+                <span asp-validation-for="Product.NumOfPlayers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Localisation" class="control-label"></label>
+                <input asp-for="Product.Localisation" class="form-control" />
+                <span asp-validation-for="Product.Localisation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.PackageList" class="control-label"></label>
+                <input asp-for="Product.PackageList" class="form-control" />
+                <span asp-validation-for="Product.PackageList" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductImage" class="control-label"></label>
+                <input asp-for="Product.ProductImage" class="form-control" />
+                <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Chars" class="control-label"></label>
+                <input asp-for="Product.Chars" class="form-control" />
+                <span asp-validation-for="Product.Chars" class="text-danger"></span>
+            </div>
+            <input asp-for="Product.WarhouseItem.Product" type="hidden" class="form-control" />
+            <input asp-for="Product.Url" type="hidden" class="form-control" />
+            <input asp-for="Product.ProductTypes" type="hidden" class="form-control" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

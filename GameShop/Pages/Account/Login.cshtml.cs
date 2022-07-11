@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GameShop.Pages.Account
 {
+    [IgnoreAntiforgeryToken]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

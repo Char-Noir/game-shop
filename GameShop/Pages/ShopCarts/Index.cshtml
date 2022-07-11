@@ -30,7 +30,7 @@ else
         @foreach (var myItem in Model.ShopCart.ListShopItems.Select((value,i) => new {i, value}))
         {
             <tr id="@myItem.value.Id">
-                <th scope="row">@myItem.i</th>
+                <th scope="row">@(myItem.i+1)</th>
                 <td>@myItem.value.Product.ProductName</td>
                 <td>
                     <form action="/ShopCarts/Update" method="post">
@@ -45,7 +45,9 @@ else
                         <button type="submit" class="btn btn-danger">Видалити</button>
                     </form>
                 </td>
-                @(price = price + myItem.value.PAmount*myItem.value.Product.ProductPrice);
+                @{
+                    price += myItem.value.PAmount * myItem.value.Product.ProductPrice;
+                }
             </tr>
         }
         <tr>
@@ -58,6 +60,7 @@ else
     <form action="/ShopCarts/Clear" method="post">
         <button type="submit" class="btn btn-danger">Очистити корзину</button>
     </form>
+    <a href="./Orders/Create" type="submit" class="btn btn-success">Створити замовлення</a>
 }
 <script>
 $(document).ready(function() {

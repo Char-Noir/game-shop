@@ -24,6 +24,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GameShop.Pages.Account
 {
+    [IgnoreAntiforgeryToken]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -116,7 +117,6 @@ namespace GameShop.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -124,7 +124,9 @@ namespace GameShop.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Створено нового користувача.");
-                                
+
+                    await _userManager.AddToRoleAsync(user,"customer");
+
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -1,10 +1,12 @@
 using GameShop.Models.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GameShop.Pages.ShopCarts
 {
+    [Authorize]
     [IgnoreAntiforgeryToken]
     public class AddModel : PageModel
     {

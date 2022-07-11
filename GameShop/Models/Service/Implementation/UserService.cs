@@ -16,6 +16,11 @@ namespace GameShop.Models.Service.Implementation
             _context = context;
         }
 
+        public async Task<int> Count()
+        {
+            return await _context.MyUser.CountAsync();
+        }
+
         public async Task<bool> Create(User user)
         {
             _context.MyUser.Add(user);

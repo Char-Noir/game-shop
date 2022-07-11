@@ -43,6 +43,32 @@ namespace GameShop.Models.Utils
             }
             product._productTypes = types;
         }
+        
+        public static string Name(this OrderStatus orderStatus)
+        {
+            return orderStatus switch
+            {
+                OrderStatus.CREATED => "Створено",
+                OrderStatus.MANAGED => "Оброблено",
+                OrderStatus.PAYED => "Оплачено",
+                OrderStatus.PACKING => "Упаковано",
+                OrderStatus.DELIVERING => "Відправлено",
+                OrderStatus.DELIVERED => "Доставлено",
+                OrderStatus.CANCELED => "Скасовано",
+                OrderStatus.QUESTIONS => "Виникли питання",
+                _ => "Виникли питання"
+            };
+        }
+        
+        public static string Name(this Payment orderStatus)
+        {
+            switch (orderStatus)
+            {
+                case Payment.CARD: return "Картка";
+                case Payment.CASH: return "Готівка";
+                default: return "Невизначено";
+            }
+        }
 
         public static void InitPackageList(this Product product)
         {

@@ -1,0 +1,88 @@
+@page
+@model GameShop.Pages.Orders.CreateModel
+
+@{
+    ViewData["Title"] = "Створити замовлення";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Orders</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label  class="control-label">Ім'я отримувача</label>
+                <input asp-for="Orders.ToName" class="form-control" />
+                <span asp-validation-for="Orders.ToName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Номер телефону отримувача</label>
+                <input asp-for="Orders.ToTelno" class="form-control" />
+                <span asp-validation-for="Orders.ToTelno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Електрона пошта</label>
+                <input asp-for="Orders.ToEmail" class="form-control" />
+                <span asp-validation-for="Orders.ToEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Адреса отримувача</label>
+                <input asp-for="Orders.Address" class="form-control" />
+                <span asp-validation-for="Orders.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Тип оплати</label>
+                <select asp-for="Orders.Payment" class="form-control">
+                    <option value="CASH">Готівкою</option>
+                    <option value="CARD">Карткою</option>
+                </select>
+                <span asp-validation-for="Orders.Payment" class="text-danger"></span>
+            </div>
+            Деталі замовлення:
+            <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Товар</th>
+                        <th scope="col">Кількість</th>
+                        <th scope="col">Ціна</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var price = 0.0d;
+                    }
+                    @foreach (var myItem in Model.ShopCart.ListShopItems.Select((value,i) => new {i, value}))
+                    {
+                        <tr id="@myItem.value.Id">
+                            <th scope="row">@(myItem.i+1)</th>
+                            <td>@myItem.value.Product.ProductName</td>
+                            <td>@myItem.value.PAmount</td>
+                            <td>@(myItem.value.PAmount*myItem.value.Product.ProductPrice)</td>
+                            @{
+                                price += myItem.value.PAmount * myItem.value.Product.ProductPrice;
+                            }
+                        </tr>
+                    }
+                    <tr>
+                        <th scope="row"></th>
+                        <td colspan="2">Усього</td>
+                        <td>@price</td>
+                    </tr>
+                    </tbody>
+                </table>
+            <div class="form-group">
+                <button type="submit" value="Create" class="btn btn-primary" >Сворити замовлення</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/ShopCarts/Index">Повернутися до кошику</a>
+</div>
+
