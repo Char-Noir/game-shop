@@ -1,23 +1,26 @@
 ﻿#nullable disable
+using System.Collections;
 using GameShop.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GameShop.Models.Entity;
+using GameShop.Models.Service.Interface;
 using GameShop.Models.Utils;
 
 namespace GameShop.Pages.Products
 {
     public class DetailsModel : PageModel
     {
-        private readonly GameShopContext _context;
+        private readonly IProductService _productService;
 
-        public DetailsModel(GameShopContext context)
+        public DetailsModel(IProductService productService)
         {
-            _context = context;
+            _productService = productService;
         }
 
         public Product Product { get; set; }
+        public IList<Product> BoughtWith { get; set; }
 
         public async Task<IActionResult> OnGetAsync(long id)
         {
@@ -26,8 +29,9 @@ namespace GameShop.Pages.Products
                 return NotFound();
             }
 
-            Product = await _context.Product.Include(m=>m.ProductTypes).ThenInclude(x=>x.Product_Type).FirstOrDefaultAsync(m => m.Id == id);
-
+            Product = await _productService.GetById(id);
+            BoughtWith = await _productService.GetBoughtWith(id,4);
+            
             if (Product == null)
             {
                 return NotFound();

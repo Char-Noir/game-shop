@@ -438,8 +438,8 @@ ul li a:hover {
 
 .p_stick {
     width: 60%;
-    position: fixed;
-    margin: 0 0 0 40%;
+    //position: fixed;
+    margin: 0 0 0 200px;
     padding: 54px 0;
 }
 
