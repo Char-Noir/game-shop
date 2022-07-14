@@ -16,15 +16,17 @@ namespace GameShop.Pages
         {
             _logger = logger;
             _productService = productService;
+            News = new List<Product>();
         }
         
-        public IList<Product> Product { get; set; } 
+        public IList<Product> News { get; set; } 
+        public IList<Product> Popular { get; set; } 
         
         public async Task<IActionResult> OnGet()
         {
-            _logger.Log(LogLevel.Information,"Index OnGet started!");
-            var all = await _productService.GetAll();
-            Product =  all.Take(4).ToList();
+            _logger.Log(LogLevel.Information, "Index OnGet started!");
+            News = await _productService.GetNewProducts(4);
+            Popular = await _productService.GetPopularProducts(4);
             _logger.Log(LogLevel.Information,"Index OnGet successfully ended!");   
             return Page();
         }
