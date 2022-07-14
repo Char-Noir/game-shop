@@ -17,12 +17,14 @@ namespace GameShop.Models.Service.Implementation
         {
             var folder = filetype switch
             {
-                FileType.IMAGE => "images",
+                FileType.IMAGE_GAME => "images/games",
                 _ => throw new ArgumentOutOfRangeException(nameof(filetype), filetype,
                     "This filetype is not supported yet.")
             };
 
-            var filePath = Path.Combine(_environment.ContentRootPath, "wwwroot", folder, name);
+            var path = name.Split("/");
+            Directory.CreateDirectory(Path.Combine(_environment.ContentRootPath, "wwwroot", folder, path[0]));
+            var filePath = Path.Combine(_environment.ContentRootPath, "wwwroot", folder, path[0], path[1]);
             await using var fileStream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(fileStream);
         }

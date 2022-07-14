@@ -59,7 +59,7 @@ namespace GameShop.Pages.Products
             }
             Product.Url = Util.GetName(Product.ProductName);
             string fileName = Product.Url + '/' + Upload.FileName;
-            await _fileService.Upload(FileType.IMAGE,fileName , Upload);
+            await _fileService.Upload(FileType.IMAGE_GAME,fileName , Upload);
             Product.ProductImage = fileName;
             try
             {

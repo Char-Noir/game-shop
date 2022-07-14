@@ -11,9 +11,10 @@
     {
         <li id="external-logins" class="nav-item width-275"><a id="external-login" class="nav-link width-275 @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
     }
-    <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Дво-факторна авторизація</a></li>
-    <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Особисті дані</a></li>
-    <li class="nav-item width-275"><a class="nav-link width-275" id="logout" href="../Logout">Вийти з аккаунта</a></li>
+   <!-- <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Дво-факторна авторизація</a></li>
+    <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Особисті дані</a></li>-->
+    <li class="nav-item width-275"><a class="nav-link width-275" id="logout" asp-page="/Orders">Замовлення</a></li>
+    <li class="nav-item width-275"><a class="nav-link width-275" id="logout" asp-page="/Account/Logout">Вийти з аккаунта</a></li>
     @if (User.IsInRole("admin"))
     {
          <li class="nav-item width-275"><a class="nav-link width-275" id="admin" asp-page="/Admin/Dashboard">Панель адміністратора</a></li>

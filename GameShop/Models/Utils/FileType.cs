@@ -2,6 +2,6 @@
 {
     public enum FileType
     {
-        IMAGE
+        IMAGE_GAME
     }
 }
