@@ -31,7 +31,7 @@ namespace GameShop.Models.Service.Implementation
 
         public async Task<IList<Product>> GetNewProducts(int size)
         {
-            return await _context.Product.Reverse().Take(size).ToListAsync();
+            return await _context.Product.OrderByDescending(p=>p.Id).Take(size).ToListAsync();
         }
 
         public async Task<IList<Product>> GetBoughtWith(long product,int size)
@@ -93,7 +93,7 @@ namespace GameShop.Models.Service.Implementation
 
         public async Task<Product> GetById(long id)
         {
-            var product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _context.Product.Include(p=>p.WarhouseItem).Include(p=>p.ProductTypes).ThenInclude(t=>t.Product_Type).FirstOrDefaultAsync(m => m.Id == id);
 
             if (product == null)
             {
