@@ -24,6 +24,28 @@ namespace GameShop.Models.Service.Implementation
             return await _context.Product.CountAsync();
         }
 
+        public async Task<IList<Product>> GetPopularProducts(int size)
+        {
+            return await _context.Product.OrderByDescending(p => _context.Orders.Count(o => o.OrderDetails.Any(d=>d.Product.Id==p.Id))).Take(size).ToListAsync();
+        }
+
+        public async Task<IList<Product>> GetNewProducts(int size)
+        {
+            return await _context.Product.Reverse().Take(size).ToListAsync();
+        }
+
+        public async Task<IList<Product>> GetBoughtWith(long product,int size)
+        {
+            var first = await _context.Product.Where(p => _context.Orders.Any(o=>o.OrderDetails.Any(d=>d.Product.Id==product))).Take(size).ToListAsync();
+            
+            if (first.Count < size)
+            {
+                first.AddRange(await GetPopularProducts(size-first.Count));
+            }
+
+            return first;
+        }
+
         public async Task<bool>  Create(Product product)
         {
             var types = new List<ProductType>();

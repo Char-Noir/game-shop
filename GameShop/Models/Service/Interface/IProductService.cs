@@ -13,5 +13,9 @@ namespace GameShop.Models.Service.Interface
         Task<bool> Delete(Product product);
         Task<PaginationResponse<Product>> GetPaginatedResult(PaginationDataTable pagination, ProductsFilterEntity filterEntity);
         Task<long> Count();
+        
+        Task<IList<Product>> GetPopularProducts(int size);
+        Task<IList<Product>> GetNewProducts(int size);
+        Task<IList<Product>> GetBoughtWith(long product,int size);
     }
 }
