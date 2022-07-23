@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include=".circleci\config.yml" />
     <Content Include="Design\LayoutPage\img\Anna.jpg">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -89,6 +90,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="Pages\Orders\" />
     <Folder Include="Pages\Manager\" />
+    <Folder Include="Properties\PublishProfiles" />
   </ItemGroup>
 
   <ItemGroup>

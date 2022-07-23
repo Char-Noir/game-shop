@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="a826738c-1e2b-4f7a-bd9b-ede181bc1472" name="GameShopContext-c0f9bc22-f628-4c05-a42f-2d8cbcc3855c (DDL) Mapping">
+      <data-sources db="45beb110-3e4c-4135-a7e5-bd64b3c3448c" ddl="f7f893f5-13e3-4b05-8ef3-21aaf5589d8d" />
+      <scope>
+        <node kind="database" qname="@">
+          <node kind="schema" qname="@" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>
