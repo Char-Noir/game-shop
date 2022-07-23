@@ -89,12 +89,8 @@ U
 %GameShop/Pages/ShopCarts/Index.cshtml,e\9\e9f2537de3a43d55b856fa6545e13ee9a3acb457
 Y
 )GameShop/Pages/Account/Manage/Name.cshtml,a\c\ac03ef881f23ee11fbdd96793f4907790e8d1370
-I
-GameShop/appsettings.json,c\7\c760ae2e393f997e20cb2dfe17b51c420247704b
 _
 /GameShop/Pages/Account/Manage/ManageNavPages.cs,1\f\1fcf8ae2c1bd2fde2ec99d86f6493cc1fda6c27e
-C
-GameShop/Program.cs,f\8\f8a0b37eb731f070083c2ebc6d8e6e8ba78c928b
 V
 &GameShop/Pages/ShopCarts/Add.cshtml.cs,e\d\ed9589eefa565b750b46b489407108bacb832df0
 _
@@ -113,7 +109,9 @@ N
 GameShop/Models/Entity/User.cs,7\0\70d4dfb3e6ed3c39d8434cf9c2cd49e521424194
 g
 7GameShop/Pages/Account/ResetPasswordConfirmation.cshtml,3\2\32a81be7bac13812f4d3dd675715c6464197e539
-C
-GameShop/Dockerfile,a\a\aaf316d0ff93b3a8066a849a53507e4e2cc8f71d
-M
-GameShop/.circleci/config.yml,4\6\46eee59ae4415f107751ee68885746b911d46d71
+g
+7GameShop/Migrations/20220723074737_PostrGreMigration.cs,c\3\c37d4931f758ce52a65ce79cf21a2a0bf41dd62a
+c
+3GameShop/Migrations/GameShopContextModelSnapshot.cs,d\4\d46898053b60b77e5a703cc9d1e379e3a4f3327e
+p
+@GameShop/Migrations/20220723074737_PostrGreMigration.Designer.cs,4\8\48e3c038ea408ebfb972eac9f56798e9e9689340

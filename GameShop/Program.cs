@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var connectionString = builder.Configuration.GetConnectionString("GameShopContextConnection") ?? throw new InvalidOperationException("Connection string 'GameShopContextConnection' not found.");
 
 builder.Services.AddDbContext<GameShopContext>(options =>
@@ -30,7 +29,7 @@ builder.Services.AddScoped<IEmailSender, GmailSender>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

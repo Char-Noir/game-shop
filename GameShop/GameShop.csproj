@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include=".circleci\config.yml" />
     <Content Include="Design\LayoutPage\img\Anna.jpg">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
