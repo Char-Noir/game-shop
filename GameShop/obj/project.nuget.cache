@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/IpcIShN/8PPk06ezkdbrKPd/YL7aChJRi3zUn/O+PjidWWiMGcc5c24+86+MQLraD4ME7mzuZ2cvzVl4rDuyw==",
+  "dgSpecHash": "4ejB2y3OB/1axaVCTy+S17LH7wVe0+HF2vJ849Un7YnIZydsmE8RGjI6+Z5Yy59+eLTjsgJNqD2/V2HwSs+sBw==",
   "success": true,
   "projectFilePath": "C:\\Users\\dbury\\source\\repos\\GameShop\\GameShop\\GameShop.csproj",
   "expectedPackageFiles": [
@@ -87,6 +87,8 @@
     "C:\\Users\\dbury\\.nuget\\packages\\mimekit\\3.3.0\\mimekit.3.3.0.nupkg.sha512",
     "C:\\Users\\dbury\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
     "C:\\Users\\dbury\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\dbury\\.nuget\\packages\\npgsql\\6.0.5\\npgsql.6.0.5.nupkg.sha512",
+    "C:\\Users\\dbury\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.5\\npgsql.entityframeworkcore.postgresql.6.0.5.nupkg.sha512",
     "C:\\Users\\dbury\\.nuget\\packages\\nuget.common\\5.11.0\\nuget.common.5.11.0.nupkg.sha512",
     "C:\\Users\\dbury\\.nuget\\packages\\nuget.configuration\\5.11.0\\nuget.configuration.5.11.0.nupkg.sha512",
     "C:\\Users\\dbury\\.nuget\\packages\\nuget.dependencyresolver.core\\5.11.0\\nuget.dependencyresolver.core.5.11.0.nupkg.sha512",

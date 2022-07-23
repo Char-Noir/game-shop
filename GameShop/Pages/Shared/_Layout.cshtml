@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/GameShop.styles.css" asp-append-version="true"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css" asp-append-version="true">
+    @{
+        if( ViewData["Search"] == null)
+        {
+             ViewData["Search"]= "";
+        }
+    }
 </head>
 <body>
 <div class="wrapper">
@@ -21,14 +27,14 @@
                 <nav class="nav">
                     <a class="nav_link" asp-page="/Index">Головна</a>
                     <a class="nav_link" asp-page="/Catalog">Каталог</a>
-                    <a class="nav_link" asp-page="/Products/Index">Про нас</a>
+                    <a class="nav_link" asp-page="/Products/Index">Пошук</a>
                 </nav>
                 <form action="/Products/Index/" method="get">
                     <div class="mb-3" id="searchNavBar">
                         <button type="submit">
                             <img src="~/images/static/search.svg" alt="">
                         </button>
-                        <input type="search" class="form-control" id="search" aria-describedby="search" placeholder="Пошук" name="FilterEntity.SearchString">
+                        <input type="search" class="form-control" value="@ViewData["Search"]" id="search" aria-describedby="search" placeholder="Пошук" name="FilterEntity.SearchString">
                     </div>
                 </form>
                 <div class="head_icons">

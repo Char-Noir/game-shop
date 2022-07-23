@@ -5,15 +5,16 @@
 <ul class="nav nav-pills flex-column">
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.NameNavClass(ViewContext)" id="name" asp-page="./Name">Ім'я</a></li>
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.NumberNavClass(ViewContext)" id="number" asp-page="./Number">Номер телефону</a></li>
+    <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.BirthDayNavClass(ViewContext)" id="birth_day" asp-page="./BirthDay">Дата народження</a></li>
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Електронна пошта</a></li>
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Пароль</a></li>
     @if (hasExternalLogins)
     {
-        <li id="external-logins" class="nav-item width-275"><a id="external-login" class="nav-link width-275 @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+        <li id="external-logins" class="nav-item width-275"><a id="external-login" class="nav-link width-275 @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">Зовнішні сервіси</a></li>
     }
    <!-- <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Дво-факторна авторизація</a></li>
     <li class="nav-item width-275"><a class="nav-link width-275 @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Особисті дані</a></li>-->
-    <li class="nav-item width-275"><a class="nav-link width-275" id="logout" asp-page="/Orders">Замовлення</a></li>
+    <li class="nav-item width-275"><a class="nav-link width-275" id="logout" href="/Orders/">Замовлення</a></li>
     <li class="nav-item width-275"><a class="nav-link width-275" id="logout" asp-page="/Account/Logout">Вийти з аккаунта</a></li>
     @if (User.IsInRole("admin"))
     {

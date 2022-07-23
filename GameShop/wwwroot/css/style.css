@@ -576,3 +576,7 @@ ul li a:hover {
 .width-275{
     width:275px;
 }
+.my_damn_class {
+    margin-left: 25px;
+    margin-top: 25px;
+}

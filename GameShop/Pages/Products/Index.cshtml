@@ -5,6 +5,9 @@
 
 @{
     ViewData["Title"] = "Сторінка:" + Model.CurrentPage;
+     
+    ViewData["Search"] = Model.FilterEntity.SearchString;
+    
 }
 
 <form method="get" id="pagination_form" class="filtr">

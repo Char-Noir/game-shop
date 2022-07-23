@@ -26,7 +26,7 @@ namespace GameShop.Models.Service.Implementation
 
         public async Task<IList<Product>> GetPopularProducts(int size)
         {
-            return await _context.Product.OrderByDescending(p => _context.Orders.Count(o => o.OrderDetails.Any(d=>d.Product.Id==p.Id))).Take(size).ToListAsync();
+            return await _context.Product.OrderByDescending(p => _context.Orders.Count(o => o.OrderDetails.Any(d=>d.Product.Id==p.Id)&& o.OrderStatus == ((OrderStatus.DELIVERED | OrderStatus.DELIVERING) & o.OrderStatus))).Take(size).ToListAsync();
         }
 
         public async Task<IList<Product>> GetNewProducts(int size)
@@ -36,14 +36,52 @@ namespace GameShop.Models.Service.Implementation
 
         public async Task<IList<Product>> GetBoughtWith(long product,int size)
         {
-            var first = await _context.Product.Where(p => _context.Orders.Any(o=>o.OrderDetails.Any(d=>d.Product.Id==product))).Take(size).ToListAsync();
-            
+            var first = await _context.Orders.Where(o => o.OrderDetails.Any(od => od.Product.Id == product)).SelectMany(o=>o.OrderDetails).GroupBy(od=>od.Product.Id).OrderByDescending(od=>od.Count()).Select(od=>od.First().Product).Take(size+1).ToListAsync();
+            first.RemoveAll(p => p.Id == product);
             if (first.Count < size)
             {
                 first.AddRange(await GetPopularProducts(size-first.Count));
             }
 
             return first;
+        }
+
+        public async Task<IList<Product>> GetByUserAge(User? user, int size)
+        {
+            if (user == null)
+            {
+                return await GetPopularProducts(size);
+            }
+            user.GetAge(_context);
+            if (user.Age < 1)
+            {
+                return await GetPopularProducts(size);
+            }
+
+            var users = await _context.MyUser.OrderBy(x => x.BirthDay).ToListAsync();
+           
+
+            foreach (var user1 in users)
+            {
+                user1.GetAge(_context);
+            }
+            
+            users = users.Where(x=>x.Age>=(user.Age-2)&&x.Age<=(user.Age+2)).ToList();
+            if (users.Count < 1)
+            {
+                return await GetPopularProducts(size);
+            }
+            
+            var products = (await _context.Orders.Include(x=>x.Customer).Include(x=>x.OrderDetails).ThenInclude(y=>y.Product).ToListAsync()).Where(x=>users.Any(u=>u.Id==x.Customer.Id)).SelectMany(x=>x.OrderDetails).GroupBy(x=>x.Product).OrderByDescending(x=>x.Count()).Select(x=>x.Key).GroupBy(x=>x.Id).Select(x=>x.FirstOrDefault()).Take(size).ToList();
+            var userProd = await _context.Orders.Where(o => o.Customer.Id == user.Id).SelectMany(o => o.OrderDetails).Select(od => od.Product).ToListAsync();
+            products.RemoveAll(p=>userProd.Any(x=>x.Id==p.Id));
+            if (products.Count < size)
+            {
+                products.AddRange(await GetPopularProducts(size));
+                products = products.GroupBy(x => x.Id).Select(x => x.FirstOrDefault()).Take(size).ToList();
+            }
+
+            return products;
         }
 
         public async Task<bool>  Create(Product product)

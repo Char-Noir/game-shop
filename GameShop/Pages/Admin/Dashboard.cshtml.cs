@@ -29,15 +29,8 @@ namespace GameShop.Pages.Admin
 
             Orders = (await _orderService.GetOrders()).Count;
             var orders = await _orderService.GetFrom(DateTime.Today.AddMonths(-1));
-            var count = 0;
-            foreach (var order in orders)
-            {
-                if (order.OrderStatus == Models.Entity.OrderStatus.DELIVERED)
-                {
-                    count++;
-                }
-            }
-            OrderPercentage = (double)count / orders.Count;
+            var count = orders.Count(order => order.OrderStatus == Models.Entity.OrderStatus.DELIVERED);
+            OrderPercentage = Math.Round((double)count / orders.Count,2)*100;
 
             Customers = await _userService.Count();
 
@@ -45,29 +38,13 @@ namespace GameShop.Pages.Admin
 
             var products = await _productService.GetAll();
 
-            count = 0;
+            count = products.Count(item => item.WarhouseItem.ProductAmount > 0);
 
-            foreach(var item in products)
-            {
-                if (item.WarhouseItem.ProductAmount > 0)
-                {
-                    count++;
-                }
-            }
-
-            ProductPercentage = (double)count / Products;
+            ProductPercentage = Math.Round((double)count / Products, 2)*100;
 
             Warehouse = count;
 
-            count = 0;
-
-            foreach (var item in products)
-            {
-                if (item.WarhouseItem.ProductAmount > 100)
-                {
-                    count++;
-                }
-            }
+            count = products.Count(item => item.WarhouseItem.ProductAmount > 100);
 
             return Page();
         }

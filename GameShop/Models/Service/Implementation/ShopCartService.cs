@@ -27,7 +27,7 @@ public class ShopCartService:IShopCartService
         var cartItem = cart.ListShopItems.FirstOrDefault(item => item.Product.Id == product1.Id);
         if (quantity <= 0 || quantity > product1.WarhouseItem.ProductAmount)
         {
-            throw new InvalidDataException("Invalid quantity");
+            throw new QuantityException();
         }
         if (cartItem == null)
         {
@@ -74,7 +74,7 @@ public class ShopCartService:IShopCartService
 
         if (quantity <= 0 || quantity > product1.WarhouseItem.ProductAmount)
         {
-            throw new InvalidDataException("Invalid quantity");
+            throw new QuantityException();
         }
        
         cartItem.PAmount = quantity;

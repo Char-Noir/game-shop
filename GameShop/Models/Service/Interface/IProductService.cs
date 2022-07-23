@@ -17,5 +17,6 @@ namespace GameShop.Models.Service.Interface
         Task<IList<Product>> GetPopularProducts(int size);
         Task<IList<Product>> GetNewProducts(int size);
         Task<IList<Product>> GetBoughtWith(long product,int size);
+        Task<IList<Product>> GetByUserAge(User? user,int size);
     }
 }

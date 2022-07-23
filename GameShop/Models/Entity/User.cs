@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GameShop.Models.Entity
 {
@@ -10,11 +11,16 @@ namespace GameShop.Models.Entity
         public string Identity { get; set; }
         public string Name { set; get; }
         public string? Telno { set; get; }
+        
+        public DateTime? BirthDay { set; get; }
+        
+        [NotMapped]
+        public int Age { set; get; }
 
-        public User(long id, string first_name, IdentityUser identity)
+        public User(long id, string firstName, IdentityUser identity)
         {
             Id = id;
-            Name = first_name;
+            Name = firstName;
             Identity = identity.Id;
         }
 

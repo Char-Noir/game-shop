@@ -1,6 +1,7 @@
 ﻿using GameShop.Models.Entity;
 using GameShop.Models.Entity.RequestEntity;
 using System.Globalization;
+using GameShop.Data;
 
 namespace GameShop.Models.Utils
 {
@@ -73,6 +74,20 @@ namespace GameShop.Models.Utils
         public static void InitPackageList(this Product product)
         {
             product.PackageList = product.PackageList.Replace("\\n", "<br>");
+        }
+        
+        public static int GetAge(this User user, GameShopContext context)
+        {
+            if (user.BirthDay is null)
+            {
+                user.Age = (int) context.Orders.Where(o=>o.Customer.Id==user.Id && o.OrderStatus == OrderStatus.DELIVERED).SelectMany(o => o.OrderDetails).Select(x=>x.Product.Age).DefaultIfEmpty().Average(od => od);
+                
+            }
+            else
+            {
+                user.Age = DateTime.Today.Year - user.BirthDay.Value.Year;
+            }
+            return user.Age;
         }
 
         public static bool CheckEmptyListRequestEntities<T>(BaseRequestEntity<T>[] bases)

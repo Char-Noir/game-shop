@@ -19,6 +19,7 @@ namespace  GameShop.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public static string Name => "Name";
         public static string Number => "Number";
+        public static string BirthDay => "BirthDay";
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -68,6 +69,7 @@ namespace  GameShop.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public static string NameNavClass(ViewContext viewContext) => PageNavClass(viewContext, Name);
         public static string NumberNavClass(ViewContext viewContext) => PageNavClass(viewContext, Number);
+        public static string BirthDayNavClass(ViewContext viewContext) => PageNavClass(viewContext, BirthDay);
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

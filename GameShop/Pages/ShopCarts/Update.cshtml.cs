@@ -1,3 +1,4 @@
+using GameShop.Models.Exceptions;
 using GameShop.Models.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +41,21 @@ namespace GameShop.Pages.ShopCarts
 
             var productToAdd = await _productService.GetById(product);
             var myUser = await _userService.GetUserByIdentity(user);
-            await _shopCartService.UpdateQuantity(productToAdd, myUser, quantity);
+            try
+            {
+                await _shopCartService.UpdateQuantity(productToAdd, myUser, quantity);
+            }
+            catch (QuantityException e)
+            {
+                _logger.LogError(e.Message);
+                return Redirect("/ShopCarts/Error");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return NotFound();
+            }
+
             return Redirect("./Index");
         }
     }
