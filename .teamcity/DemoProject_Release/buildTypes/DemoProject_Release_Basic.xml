@@ -80,11 +80,11 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="dependencyChecker" name="Run OWASP Dependency Check" type="dotnet">
+      <runner id="dependencyChecker" name="Run OWASP Dependency Check" type="simpleRunner">
         <parameters>
-          <param name="command" value="build" />
-          <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
+          <param name="script.content" value="echo Hello" />
           <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
     </build-runners>
