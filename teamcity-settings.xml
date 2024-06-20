@@ -1,0 +1,66 @@
+<project>
+    <buildTypes>
+        <buildType id="Build">
+            <name>Build and Test</name>
+            <steps>
+                <!-- Крок 1: Відновлення пакетів NuGet -->
+                <step name="NuGet Installer" type="NuGetInstaller">
+                    <param name="nuget.path" value="NuGet.exe" />
+                    <param name="nuget.updatePackages" value="true" />
+                    <param name="nuget.solutionFile" value="GameShop.sln" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 2: Збірка проекту -->
+                <step name=".NET build" type="dotnet">
+                    <param name="command" value="build" />
+                    <param name="projects" value="GameShop.sln" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 3: Збірка з використанням MSBuild -->
+                <step name=".NET msbuild" type="MSBuild">
+                    <param name="msbuild.version" value="15.0" />
+                    <param name="msbuild.toolsVersion" value="15.0" />
+                    <param name="msbuild.targets" value="Build" />
+                    <param name="msbuild.solution" value="GameShop.sln" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 4: Публікація проекту -->
+                <step name=".NET publish" type="dotnet">
+                    <param name="command" value="publish" />
+                    <param name="projects" value="GameShop/GameShop.csproj" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 5: Запуск юніт-тестів -->
+                <step name="Run Unit Tests" type="dotnet">
+                    <param name="command" value="test" />
+                    <param name="projects" value="GameShop.Tests/GameShop.Tests.csproj" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 6: Запуск функціональних тестів -->
+                <step name="Run Functional Tests" type="dotnet">
+                    <param name="command" value="test" />
+                    <param name="projects" value="GameShop.FunctionalTests/GameShop.FunctionalTests.csproj" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 7: Статичний аналіз коду за допомогою SonarQube -->
+                <step name="Run SonarQube Analysis" type="SonarQubeRunner">
+                    <param name="sonar.projectKey" value="GameShop" />
+                    <param name="sonar.projectName" value="GameShop" />
+                    <param name="sonar.projectVersion" value="1.0" />
+                    <param name="sonar.sources" value="GameShop" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+                <!-- Крок 8: Перевірка залежностей за допомогою OWASP Dependency Check -->
+                <step name="Run OWASP Dependency Check" type="dependencyChecker">
+                    <param name="dependencyChecker.path" value="%teamcity.tool.dependency-check.cmd%" />
+                    <param name="dependencyChecker.scan" value="GameShop" />
+                    <param name="execution.mode" value="allPreviousStepsFinishedSuccessfully" />
+                </step>
+            </steps>
+            <triggers>
+                <!-- Автоматичний запуск збірки при кожному пуші змін у репозиторій -->
+                <vcsTrigger />
+            </triggers>
+        </buildType>
+    </buildTypes>
+</project>
