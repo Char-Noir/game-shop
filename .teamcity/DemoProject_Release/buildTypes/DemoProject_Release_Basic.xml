@@ -80,10 +80,10 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="dependencyChecker" name="Run OWASP Dependency Check" type="dependencyChecker">
+      <runner id="dependencyChecker" name="Run OWASP Dependency Check" type="dotnet">
         <parameters>
-          <param name="dependencyChecker.path" value="%teamcity.tool.dependency-check.cmd%" />
-          <param name="dependencyChecker.scan" value="GameShop" />
+          <param name="command" value="build" />
+          <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
