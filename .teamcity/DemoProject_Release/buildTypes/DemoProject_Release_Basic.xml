@@ -5,7 +5,6 @@
   <settings>
     <parameters />
     <build-runners>
-      <!-- Крок 1: Відновлення пакетів NuGet -->
       <runner id="jb_nuget_installer" name="NuGet Installer" type="jb.nuget.installer">
         <parameters>
           <param name="nuget.path" value="%teamcity.tool.NuGet.CommandLine.6.1.0%" />
@@ -15,7 +14,6 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 2: Збірка проекту -->
       <runner id="dotnet" name="Build Solution" type="dotnet">
         <parameters>
           <param name="command" value="build" />
@@ -24,7 +22,6 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 3: Збірка з використанням MSBuild -->
       <runner id="dotnet_1" name="MSBuild" type="dotnet">
         <parameters>
           <param name="args" value="-restore -noLogo" />
@@ -35,7 +32,6 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 4: Публікація проекту -->
       <runner id="dotnet_2" name="Publish Project" type="dotnet">
         <parameters>
           <param name="command" value="publish" />
@@ -44,7 +40,6 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 5: Запуск юніт-тестів -->
       <runner id="dotnet_3" name="Run Unit Tests" type="dotnet">
         <parameters>
           <param name="command" value="test" />
@@ -52,7 +47,6 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 6: Запуск функціональних тестів -->
       <runner id="dotnet_4" name="Run Functional Tests" type="dotnet">
         <parameters>
           <param name="command" value="test" />
@@ -60,17 +54,32 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 7: Статичний аналіз коду за допомогою SonarQube -->
-      <runner id="sonarQubeRunner" name="Run SonarQube Analysis" type="SonarQubeRunner">
+      <runner id="sonarQubeRunner" name="Run SonarQube Analysis" type="jetbrains.mspec">
         <parameters>
-          <param name="sonar.projectKey" value="GameShop" />
-          <param name="sonar.projectName" value="GameShop" />
-          <param name="sonar.projectVersion" value="1.0" />
-          <param name="sonar.sources" value="GameShop" />
+          <param name="dotNetCoverage.NCover.HTMLReport.File.Sort" value="0" />
+          <param name="dotNetCoverage.NCover.HTMLReport.File.Type" value="1" />
+          <param name="dotNetCoverage.NCover.Reg" value="selected" />
+          <param name="dotNetCoverage.NCover.platformBitness" value="x86" />
+          <param name="dotNetCoverage.NCover.platformVersion" value="v2.0" />
+          <param name="dotNetCoverage.NCover3.Reg" value="selected" />
+          <param name="dotNetCoverage.NCover3.args" value="//ias .*" />
+          <param name="dotNetCoverage.NCover3.platformBitness" value="x86" />
+          <param name="dotNetCoverage.NCover3.platformVersion" value="v2.0" />
+          <param name="dotNetCoverage.NCover3.reporter.executable.args" value="//or FullCoverageReport:Html:{teamcity.report.path}" />
+          <param name="dotNetCoverage.PartCover.Reg" value="selected" />
+          <param name="dotNetCoverage.PartCover.includes" value="[*]*" />
+          <param name="dotNetCoverage.PartCover.platformBitness" value="x86" />
+          <param name="dotNetCoverage.PartCover.platformVersion" value="v2.0" />
+          <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
+          <param name="dotNetCoverage.tool" value="dotcover" />
+          <param name="dotNetTestRunner.Type" value="MSpec" />
+          <param name="mspec_bit" value="x86" />
+          <param name="mspec_files_include" value="%build.counter%" />
+          <param name="mspec_path" value="mspec.exe" />
+          <param name="mspec_runtime_version" value="v4.0" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <!-- Крок 8: Перевірка залежностей за допомогою OWASP Dependency Check -->
       <runner id="dependencyChecker" name="Run OWASP Dependency Check" type="dependencyChecker">
         <parameters>
           <param name="dependencyChecker.path" value="%teamcity.tool.dependency-check.cmd%" />
@@ -95,3 +104,4 @@
     <cleanup />
   </settings>
 </build-type>
+
