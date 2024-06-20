@@ -42,8 +42,8 @@
       </runner>
       <runner id="dotnet_3" name="Run Unit Tests" type="dotnet">
         <parameters>
-          <param name="command" value="test" />
-          <param name="paths" value="GameShop.Tests/GameShop.Tests.csproj" />
+          <param name="command" value="build" />
+          <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
