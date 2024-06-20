@@ -5,7 +5,8 @@
   <settings>
     <parameters />
     <build-runners>
-      <runner id="jb_nuget_installer" name="" type="jb.nuget.installer">
+      <!-- Крок 1: Відновлення пакетів NuGet -->
+      <runner id="jb_nuget_installer" name="NuGet Installer" type="jb.nuget.installer">
         <parameters>
           <param name="nuget.path" value="%teamcity.tool.NuGet.CommandLine.6.1.0%" />
           <param name="nuget.updatePackages.mode" value="sln" />
@@ -14,7 +15,8 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="dotnet" name="" type="dotnet">
+      <!-- Крок 2: Збірка проекту -->
+      <runner id="dotnet" name="Build Solution" type="dotnet">
         <parameters>
           <param name="command" value="build" />
           <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
@@ -22,7 +24,8 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="dotnet_1" name="" type="dotnet">
+      <!-- Крок 3: Збірка з використанням MSBuild -->
+      <runner id="dotnet_1" name="MSBuild" type="dotnet">
         <parameters>
           <param name="args" value="-restore -noLogo" />
           <param name="command" value="msbuild" />
@@ -32,11 +35,46 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="dotnet_2" name="" type="dotnet">
+      <!-- Крок 4: Публікація проекту -->
+      <runner id="dotnet_2" name="Publish Project" type="dotnet">
         <parameters>
           <param name="command" value="publish" />
           <param name="dotNetCoverage.dotCover.home.path" value="%teamcity.tool.JetBrains.dotCover.CommandLineTools.DEFAULT%" />
           <param name="paths" value="GameShop/GameShop.csproj" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <!-- Крок 5: Запуск юніт-тестів -->
+      <runner id="dotnet_3" name="Run Unit Tests" type="dotnet">
+        <parameters>
+          <param name="command" value="test" />
+          <param name="paths" value="GameShop.Tests/GameShop.Tests.csproj" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <!-- Крок 6: Запуск функціональних тестів -->
+      <runner id="dotnet_4" name="Run Functional Tests" type="dotnet">
+        <parameters>
+          <param name="command" value="test" />
+          <param name="paths" value="GameShop.FunctionalTests/GameShop.FunctionalTests.csproj" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <!-- Крок 7: Статичний аналіз коду за допомогою SonarQube -->
+      <runner id="sonarQubeRunner" name="Run SonarQube Analysis" type="SonarQubeRunner">
+        <parameters>
+          <param name="sonar.projectKey" value="GameShop" />
+          <param name="sonar.projectName" value="GameShop" />
+          <param name="sonar.projectVersion" value="1.0" />
+          <param name="sonar.sources" value="GameShop" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <!-- Крок 8: Перевірка залежностей за допомогою OWASP Dependency Check -->
+      <runner id="dependencyChecker" name="Run OWASP Dependency Check" type="dependencyChecker">
+        <parameters>
+          <param name="dependencyChecker.path" value="%teamcity.tool.dependency-check.cmd%" />
+          <param name="dependencyChecker.scan" value="GameShop" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
@@ -57,4 +95,3 @@
     <cleanup />
   </settings>
 </build-type>
-
